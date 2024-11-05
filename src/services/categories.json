@@ -1,0 +1,86 @@
+[
+  {
+    "title": "All",
+    "tags": []
+  },
+  {
+    "title": "Games",
+    "tags": [
+      "games",
+      "launcher",
+      "gaming"
+    ]
+  },
+  {
+    "title": "Music",
+    "tags": [
+      "audio",
+      "song",
+      "playlist",
+      "radio",
+      "podcast",
+      "recording"
+    ]
+  },
+  {
+    "title": "Art",
+    "tags": [
+      "design",
+      "drawing",
+      "svg",
+      "vector-graphics",
+      "paint",
+      "photo",
+      "image",
+      "3d"
+    ]
+  },
+  {
+    "title": "Web",
+    "tags": [
+      "chat",
+      "mail",
+      "wifi",
+      "cloud",
+      "network",
+      "security",
+      "connection",
+      "browser"
+    ]
+  },
+  {
+    "title": "Utility",
+    "tags": [
+      "dictionary",
+      "education",
+      "productivity",
+      "display",
+      "tool",
+      "publisher",
+      "customization",
+      "disk",
+      "notes",
+      "word",
+      "compression",
+      "document",
+      "keyboardmanager",
+      "boot",
+      "conversion"
+    ]
+  },
+  {
+    "title": "Development",
+    "tags": [
+      "ide",
+      "development",
+      "developer-tools",
+      "code",
+      "sqlite",
+      "python",
+      "runtime",
+      "terminal",
+      "javascript",
+      "jetbrains"
+    ]
+  }
+]
