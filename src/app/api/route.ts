@@ -26,6 +26,7 @@ export async function GET(request: Request) {
   const search = searchParams.get("search") || "";
   
   // Busca os mais de +4000 pacotes
+  // var pkgs = packages as AppItemTypes[];
   
   // Separar por categoria, se solicitado
   if(categories) {

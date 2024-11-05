@@ -27,8 +27,10 @@ export default function SearchSectionOne() {
   async function getPackages(limit: number) {
     var categories: string[] = categorySelected;
 
-    const request = await api.get(`/packages?limit=${limit}${categories.length ? `&categories=${categories}` : ""}${searchText ? `&search=${searchText}` : ""}`);
+    const request = await api.get(`/?limit=${limit}${categories.length ? `&categories=${categories}` : ""}${searchText ? `&search=${searchText}` : ""}`);
     const pkgs = await request.data as AppItemTypes[];
+
+    console.log("Packages" + pkgs);
 
     setpackages(pkgs);
   }

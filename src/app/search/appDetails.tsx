@@ -19,7 +19,7 @@ export function AppDetails({ app, getPackages }: IAppDetails) {
   const [appThumbnail, setAppThumbnail] = useState<string | null>(null);
 
   async function getThumbnail() {
-    const request = await api.post('/packages/thumbnail', { site: app.Site });
+    const request = await api.post('/thumbnail', { site: app.Site });
     const { image } = request.data;
     setAppThumbnail(image);
   }

@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Wrapper = styled.div<{dropdown: boolean, isInfoSidebarVisible: boolean}>`
   background-color: var(--purple-dark-gray);
   padding: 80px 0;
+  min-height: 100vh;
   
   .appList {
     margin: 0 ${({ isInfoSidebarVisible }) => isInfoSidebarVisible ? "0" : "-100px" };
