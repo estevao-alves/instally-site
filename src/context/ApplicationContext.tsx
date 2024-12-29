@@ -43,8 +43,8 @@ export const ApplicationProvider = ({ children }: any) => {
     var pkgs = [] as AppItemTypes[];
     
     // Verificar se o app já está adicionado...
-    if(packagesAdded.filter((pkg) => pkg.Id === item.Id)[0]) {
-      pkgs = packagesAdded.filter((pkg) => pkg.Id !== item.Id);
+    if(packagesAdded.filter((pkg) => pkg.WingetId === item.WingetId)[0]) {
+      pkgs = packagesAdded.filter((pkg) => pkg.WingetId !== item.WingetId);
     }
     // Se não tiver adicionado...
     else {

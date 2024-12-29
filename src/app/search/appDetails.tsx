@@ -33,10 +33,10 @@ export function AppDetails({ app, getPackages }: IAppDetails) {
     <div className="content">
       { appThumbnail ? <div className="ogImage" style={{ backgroundImage: `url(${appThumbnail})` }} /> : <></>}
       <div className="title">
-        <img src={`/icons/${app.Id}.png`} />
+        <img src={`/icons/${app.WingetId}.png`} />
         <div className="rightContent">
           <span>{app.LatestVersion}</span>
-          <span>{app.Id}</span>
+          <span>{app.WingetId}</span>
         </div>
       </div>
       <p className="description">{app.Description}</p>
@@ -56,7 +56,7 @@ export function AppDetails({ app, getPackages }: IAppDetails) {
 
       <TimesSvg className="close" onClick={() => {
         packages?.map((item) => {
-          if (appSelected?.Id === item.Id) setAppSelected(null);
+          if (appSelected?.WingetId === item.WingetId) setAppSelected(null);
         }) 
       }} />
     </div>

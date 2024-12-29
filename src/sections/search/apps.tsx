@@ -19,13 +19,13 @@ export default function Apps() {
         {packages === null ? <div className="loading" style={{ margin: "auto" }} />
         : packages.map((item: AppItemTypes, i: number) => {
           
-          const alreadySelected = appSelected?.Id === item.Id;
+          const alreadySelected = appSelected?.WingetId === item.WingetId;
 
           const iconImg = !!item?.Site ? 
-            <img src={`/icons/${item.Id}.png`} alt=""/>
+            <img src={`/icons/${item.WingetId}.png`} alt=""/>
           : <span>{grabFirstLetters(item.Name)}</span>;
 
-          return <div key={i} className={`item${(packagesAdded.filter((pkg) => pkg.Id === item.Id).length > 0) ? " selected" : ""}`}>
+          return <div key={i} className={`item${(packagesAdded.filter((pkg) => pkg.WingetId === item.WingetId).length > 0) ? " selected" : ""}`}>
             <div className="clickArea" onClick={() => addOrRemoveApp(item)}></div>
             <div className="icon">
               {iconImg}

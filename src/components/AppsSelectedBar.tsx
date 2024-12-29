@@ -103,7 +103,7 @@ export default function AppsSelectedBar({ appList, removeApp }: ComponentTypes) 
       <div className="apps">
         {appList.map((item, i: number) => {
           return <div key={i} className="item" onClick={() => removeApp(item)}>
-            <img src={`/icons/${item.Id}.png`} />
+            <img src={`/icons/${item.WingetId}.png`} />
             <TimesSVG />
           </div>
         })}
