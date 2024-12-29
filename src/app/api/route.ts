@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import packages from "@/services/winget/packages.json";
 import nameListMostSearched from "@/services/winget/nameslist-most-searched.json";
 import { AllowedCharacter } from "@/services/winget/helpers";
+import { v4 as uuidv4 } from "uuid"; 
 
 export type AppItemTypes = {
   WingetId: string,
@@ -78,6 +79,7 @@ export async function PUT() {
       
     // Construção
     return {
+      Guid: uuidv4(),
       WingetId: pkg.Id,
       Name: pkg.Latest.Name,
       Publisher: pkg.Latest.Publisher,
@@ -86,7 +88,7 @@ export async function PUT() {
       Site: pkg.Latest.Homepage,
       VersionsLength: versions,
       LatestVersion: pkg.Versions[0],
-      Score: score
+      Score: score,
     }
   })))?.filter((item: AppItemTypes | null) => !!item) as AppItemTypes[];
   
