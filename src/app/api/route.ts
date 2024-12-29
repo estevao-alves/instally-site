@@ -4,7 +4,7 @@ import nameListMostSearched from "@/services/winget/nameslist-most-searched.json
 import { AllowedCharacter } from "@/services/winget/helpers";
 
 export type AppItemTypes = {
-  Id: string,
+  WingetId: string,
   Name: string,
   Publisher: string,
   Tags: string[],
@@ -78,7 +78,7 @@ export async function PUT() {
       
     // Construção
     return {
-      Id: pkg.Id,
+      WingetId: pkg.Id,
       Name: pkg.Latest.Name,
       Publisher: pkg.Latest.Publisher,
       Tags: pkg.Latest.Tags,
