@@ -32,17 +32,30 @@ const Wrapper = styled.div`
   }
 `;
 
+const INSTALLY_EXE_URL = "https://github.com/estevao-alves/Instally/releases/download/main-release/Instally-V1.0.0.exe"
+
 interface IActionButton extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text?: string,
   icon?: any,
-  style?: {}
+  style?: {},
+  downloadable?: boolean
 }
 
-export default function ActionButton({text, icon, style}: IActionButton) {
+export default function ActionButton({text, icon, style, downloadable = true}: IActionButton) {
+  const downloadFile = (url: string) => {
+    const fileName = url.split("/").pop() || "Instally.exe";
+    const anchorTag = document.createElement("a");
+    anchorTag.href = url;
+    anchorTag.setAttribute("download", fileName);
+    document.body.appendChild(anchorTag);
+    anchorTag.click();
+    anchorTag.remove();
+  }
+
   return <Wrapper>
-    <button className="cta" style={style}>
+    <button className="cta" onClick={downloadable ? () => downloadFile(INSTALLY_EXE_URL) : undefined} style={style}>
       {icon !== false ? <DownloadSVG /> : <></> }
-      {text || "Beta coming soon"}
+      {text || "Windows download"}
       </button>
   </Wrapper>
 }

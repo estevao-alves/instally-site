@@ -2,6 +2,7 @@ import { AppItemTypes } from "@/app/api/packages/route";
 import styled from "styled-components";
 
 import TimesSVG from "@/assets/icons/times.svg";
+import ActionButton from "./ActionButton";
 
 const Wrapper = styled.div`
   background-color: var(--purple-gray);
@@ -13,12 +14,12 @@ const Wrapper = styled.div`
   position: fixed;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   z-index: 99;
   
   .content {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     width: 100%;
     --size: 60px;
 
@@ -109,7 +110,7 @@ export default function AppsSelectedBar({ appList, removeApp }: ComponentTypes) 
         })}
       </div>
       
-      <button className="install">Beta coming soon</button>
+      <ActionButton className="install" style={{padding: "12px 30px", borderRadius: "8px", marginRight: "20px"}} text="Instally" icon={false}/>
     </div>
   </Wrapper>
 }
