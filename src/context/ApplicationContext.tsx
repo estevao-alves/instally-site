@@ -1,6 +1,6 @@
 'use client'
 
-import { AppItemTypes } from "@/app/api/route"
+import { AppItemTypes } from "@/app/api/packages/route"
 import { createContext, useState } from "react"
 
 interface IContext {

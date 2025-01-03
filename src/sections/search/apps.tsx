@@ -3,7 +3,7 @@ import AlertSVG from "@/assets/icons/alert.svg";
 
 import { Wrapper } from "./styles/apps";
 import { grabFirstLetters } from "@/helpers/format";
-import { AppItemTypes } from "@/app/api/route";
+import { AppItemTypes } from "@/app/api/packages/route";
 import { ApplicationContext } from "@/context/ApplicationContext";
 
 export default function Apps() {

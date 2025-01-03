@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import TagSvg from "@/assets/icons/tag.svg";
 import TimesSvg from "@/assets/icons/times.svg";
 
-import { AppItemTypes } from "../api/route";
+import { AppItemTypes } from "../api/packages/route";
 import { Wrapper } from "./styles/appDetails";
 import { api } from "@/services/api";
 import { ApplicationContext } from "@/context/ApplicationContext";

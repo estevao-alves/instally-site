@@ -4,7 +4,7 @@ import SearchSVG from "@/assets/icons/search.svg";
 import ArrowDownSVG from "@/assets/icons/arrow-down.svg";
 
 import { Container } from "@/styles/layout";
-import { AppItemTypes } from "@/app/api/route";
+import { AppItemTypes } from "@/app/api/packages/route";
 import { api } from "@/services/api";
 import AppsSelectedBar from "@/components/AppsSelectedBar";
 import { ApplicationContext } from "@/context/ApplicationContext";

@@ -1,4 +1,4 @@
-import { AppItemTypes } from "@/app/api/route";
+import { AppItemTypes } from "@/app/api/packages/route";
 import styled from "styled-components";
 
 import TimesSVG from "@/assets/icons/times.svg";

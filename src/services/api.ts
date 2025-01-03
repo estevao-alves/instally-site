@@ -6,7 +6,7 @@ export const api = getApiClient();
 function getApiClient(ctx?: any) {
   
   const api = axios.create({
-    baseURL: `${configs.domain}/api`
+    baseURL: `${configs.domain}/api/packages`
   })
   
   return api;
