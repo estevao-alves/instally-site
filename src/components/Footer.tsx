@@ -9,6 +9,15 @@ const Wrapper = styled.div`
   padding: 60px 0;
   background: var(--purple-dark-gray);
   position: relative;
+  
+  a {
+    color: var(--medium-gray);
+    font-weight: 400;
+    
+    &:hover {
+        text-decoration: underline;
+    }
+  }
 
   .businessAndLinks {
     gap: 18px;
@@ -80,17 +89,17 @@ export default function Footer() {
       <div className="content">
           <div className="businessAndLinks">
             <div className="installyGrayLogo"><InstallyGrayLogoSvg /></div>
-            {/*<h3>Follow me</h3>*/}
-            <span>estevaoalvescg@gmail.com</span>
-            <div className="number">
+            <h3>Follow me</h3>
+            <span>stayonlinedev@gmail.com</span>
+            {/*<div className="number">
               <div className="brasilIcon"><BrasilIconSvg /></div>
               <span>+55 (35) 99808-4139</span>
-            </div>
+            </div>*/}
           </div>
       </div>
 
       <div className="author">
-        <span>Made with 💜 by <strong>Estevão Alves</strong></span>
+        <span>Made with 💜 by <a href="https://www.estevaoalves.com/" target="_blank">Estevão Alves</a></span>
       </div>
     </Container>
   </Wrapper>

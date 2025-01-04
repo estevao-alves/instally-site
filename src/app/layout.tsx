@@ -22,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body rel='preload' className={font.className}>
+      <body className={font.className}>
         <StyledComponentsRegistry>
           <ApplicationProvider>
             {children}
