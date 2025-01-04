@@ -89,7 +89,7 @@ export default function Footer() {
       <div className="content">
           <div className="businessAndLinks">
             <div className="installyGrayLogo"><InstallyGrayLogoSvg /></div>
-            <h3>Follow me</h3>
+            {/*<h3>Follow me</h3>*/}
             <span>stayonlinedev@gmail.com</span>
             {/*<div className="number">
               <div className="brasilIcon"><BrasilIconSvg /></div>
