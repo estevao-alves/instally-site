@@ -1,4 +1,4 @@
-import { AppItemTypes } from "@/app/api/packages/route";
+import {AppItemTypes} from "@/app/api/packages/route";
 import styled from "styled-components";
 
 import TimesSVG from "@/assets/icons/times.svg";
@@ -93,24 +93,25 @@ const Wrapper = styled.div`
 `;
 
 interface ComponentTypes {
-  appList: AppItemTypes[],
-  removeApp: (item: AppItemTypes) => void
+    appList: AppItemTypes[],
+    removeApp: (item: AppItemTypes) => void
 }
 
-export default function AppsSelectedBar({ appList, removeApp }: ComponentTypes) {
-  
-  return <Wrapper>
-    <div className="content">
-      <div className="apps">
-        {appList.map((item, i: number) => {
-          return <div key={i} className="item" onClick={() => removeApp(item)}>
-            <img src={`/icons/${item.WingetId}.png`} />
-            <TimesSVG />
-          </div>
-        })}
-      </div>
-      
-      <ActionButton className="install" style={{padding: "12px 30px", borderRadius: "8px", marginRight: "20px"}} text="Instally" icon={false}/>
-    </div>
-  </Wrapper>
+export default function AppsSelectedBar({appList, removeApp}: ComponentTypes) {
+
+    return <Wrapper>
+        <div className="content">
+            <div className="apps">
+                {appList.map((item, i: number) => {
+                    return <div key={i} className="item" onClick={() => removeApp(item)}>
+                        <img src={`/icons/${item.WingetId}.png`}/>
+                        <TimesSVG/>
+                    </div>
+                })}
+            </div>
+
+            <ActionButton className="install" style={{padding: "12px 30px", borderRadius: "8px", marginRight: "20px"}}
+                          text="Instally" icon={false}/>
+        </div>
+    </Wrapper>
 }

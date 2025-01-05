@@ -1,5 +1,5 @@
 import ActionButton from "@/components/ActionButton";
-import { Container } from "@/styles/layout";
+import {Container} from "@/styles/layout";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -117,13 +117,14 @@ const Wrapper = styled.div`
 `;
 
 export default function Section1() {
-  return <Wrapper>
-    <Container>
-      <div className="content">
-        <h2>Nossa <span>Missão.</span></h2>
-        <p>A missão no Instally é transformar a forma como as pessoas instalam, organizam e gerenciam seus aplicativos, tornando o processo mais eficiente, intuitivo e prático.</p>
-        <ActionButton />
-      </div>
-    </Container>
-  </Wrapper>
+    return <Wrapper>
+        <Container>
+            <div className="content">
+                <h2>Nossa <span>Missão.</span></h2>
+                <p>A missão no Instally é transformar a forma como as pessoas instalam, organizam e gerenciam seus
+                    aplicativos, tornando o processo mais eficiente, intuitivo e prático.</p>
+                <ActionButton/>
+            </div>
+        </Container>
+    </Wrapper>
 }

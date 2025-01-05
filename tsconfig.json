@@ -26,9 +26,19 @@
       }
     ],
     "paths": {
-      "@/*": [ "./src/*" ]
+      "@/*": [
+        "./src/*"
+      ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/services/db.js"],
-  "exclude": ["node_modules"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/services/db.js"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div<{isAppBarActive: boolean}>`
+export const Wrapper = styled.div<{ isAppBarActive: boolean }>`
   width: 400px;
   max-width: 400px;
-  max-height: calc(96vh - ${({ isAppBarActive }) => isAppBarActive ? "80px" : "0px" });
+  max-height: calc(96vh - ${({isAppBarActive}) => isAppBarActive ? "80px" : "0px"});
   margin-left: 20px;
   
   top: 2vh;

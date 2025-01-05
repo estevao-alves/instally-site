@@ -44,12 +44,12 @@ export const Wrapper = styled.div`
       padding-bottom: 120px;
     }
 
-    .cta {
+    /*.cta {
       margin-top: 20px;
       width: 100%;
       display: flex;
       justify-content: center;
-    }
+    }*/
   }
 
   @media (max-width: 1200px) {

@@ -1,5 +1,5 @@
-import { Container } from "@/styles/layout"
-import { styled } from "styled-components"
+import {Container} from "@/styles/layout"
+import {styled} from "styled-components"
 
 import AppExampleSvg from "@/assets/app-example.svg"
 
@@ -80,12 +80,12 @@ const Wrapper = styled.div`
 `;
 
 export default function Section4() {
-  return <Wrapper>
-    <Container>
-        <div className="content">
-          <h2>More speed, <span>Less work.</span></h2>
-          <AppExampleSvg className="appExample" />
-        </div>
-    </Container>
-  </Wrapper>
+    return <Wrapper>
+        <Container>
+            <div className="content">
+                <h2>More speed, <span>Less work.</span></h2>
+                <AppExampleSvg className="appExample"/>
+            </div>
+        </Container>
+    </Wrapper>
 };

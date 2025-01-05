@@ -7,18 +7,32 @@ import S3 from '@/sections/home/Section3'
 import S4 from '@/sections/home/Section4'
 import S5 from '@/sections/home/Section5'
 import Footer from '@/components/Footer'
+import Head from 'next/head'
 
 export default function Home() {
 
-  return (
-    <>
-      <Header />
-      <S1 />
-      <S2 />
-      <S3 />
-      <S4 />
-      <S5 />
-      <Footer />
-    </>
-  )
+    return (
+        <>
+            {/* Google Tag Manager (gtag.js) */}
+            <Head>
+                <script async src="https://www.googletagmanager.com/gtag/js?id=G-W739EE488P"></script>
+                <script>
+                    {`
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        gtag('js', new Date());
+                        gtag('config', 'G-W739EE488P');
+                    `}
+                </script>
+            </Head>
+
+            <Header/>
+            <S1/>
+            <S2/>
+            <S3/>
+            <S4/>
+            <S5/>
+            <Footer/>
+        </>
+    )
 }

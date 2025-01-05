@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div<{dropdown: boolean, isInfoSidebarVisible: boolean}>`
+export const Wrapper = styled.div<{ dropdown: boolean, isInfoSidebarVisible: boolean }>`
   background-color: var(--purple-dark-gray);
   padding: 80px 0;
   min-height: 100vh;
   
   .appList {
-    margin: 0 ${({ isInfoSidebarVisible }) => isInfoSidebarVisible ? "0" : "-100px" };
+    margin: 0 ${({isInfoSidebarVisible}) => isInfoSidebarVisible ? "0" : "-100px"};
     display: grid;
     grid-template-columns: 1fr auto;
   }
@@ -30,11 +30,11 @@ export const Wrapper = styled.div<{dropdown: boolean, isInfoSidebarVisible: bool
         color: var(--white);
         
         min-width: fit-content;
-        width: ${({dropdown}) => dropdown ? "200px" : "initial" };
+        width: ${({dropdown}) => dropdown ? "200px" : "initial"};
         padding: 0 20px;
         border-radius: 10px;
-        border-end-end-radius: ${({dropdown}) => dropdown ? "0" : "10px" };
-        border-end-start-radius: ${({dropdown}) => dropdown ? "0" : "10px" };
+        border-end-end-radius: ${({dropdown}) => dropdown ? "0" : "10px"};
+        border-end-start-radius: ${({dropdown}) => dropdown ? "0" : "10px"};
         gap: 20px;
 
         font-size: 14px;
@@ -51,7 +51,7 @@ export const Wrapper = styled.div<{dropdown: boolean, isInfoSidebarVisible: bool
 
         svg {
           width: 20px;
-          transform: rotate(${({dropdown}) => dropdown ? "180deg" : "0" });
+          transform: rotate(${({dropdown}) => dropdown ? "180deg" : "0"});
           
           path {
             stroke: var(--white);

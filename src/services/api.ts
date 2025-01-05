@@ -4,10 +4,10 @@ import configs from "../../configs";
 export const api = getApiClient();
 
 function getApiClient(ctx?: any) {
-  
-  const api = axios.create({
-    baseURL: `${configs.domain}/api/packages`
-  })
-  
-  return api;
+
+    const api = axios.create({
+        baseURL: `${configs.domain}/api/packages`
+    })
+
+    return api;
 }

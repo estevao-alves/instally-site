@@ -1,6 +1,6 @@
 import ActionButton from "@/components/ActionButton"
-import { Container } from "@/styles/layout"
-import { styled } from "styled-components"
+import {Container} from "@/styles/layout"
+import {styled} from "styled-components"
 
 const Wrapper = styled.div`
   padding: 120px 0;
@@ -86,12 +86,12 @@ const Wrapper = styled.div`
 
 
 export default function Section5() {
-  return <Wrapper>
-    <Container>
-      <div className="content">
-        <h2>Make it simple, <span>Instally</span> and Enjoy!</h2>
-        <ActionButton />
-      </div>
-    </Container>
-  </Wrapper>
+    return <Wrapper>
+        <Container>
+            <div className="content">
+                <h2>Make it simple, <span>Instally</span> and Enjoy!</h2>
+                <ActionButton/>
+            </div>
+        </Container>
+    </Wrapper>
 };

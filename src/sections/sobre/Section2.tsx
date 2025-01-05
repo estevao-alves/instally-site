@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { Container } from "@/styles/layout"
+import {Container} from "@/styles/layout"
 
 import BoxesSvg from "@/assets/boxes.svg"
 import LogoSoloSvg from "@/assets/logo-solo.svg"
@@ -142,18 +142,22 @@ const Wrapper = styled.div`
 `;
 
 export default function Section2() {
-  return <Wrapper>
-    <Container>
-        <div className="content">
-          <div className="leftContent">
-            <div className="text">
-              <LogoSoloSvg className="logoSolo" />
-              <p>Instally representa nossa missão pela simplificação da vida digital. Criamos esta plataforma com um objetivo claro: proporcionar uma experiência de instalação de aplicativos mais inteligente e eficaz.</p>
-              <p>Acreditamos que a instalação manual de aplicativos é uma tarefa que consome tempo e energia desnecessários, a Instally nasceu do propósito de que a tecnologia deve ser uma aliada, não uma barreira.</p>
+    return <Wrapper>
+        <Container>
+            <div className="content">
+                <div className="leftContent">
+                    <div className="text">
+                        <LogoSoloSvg className="logoSolo"/>
+                        <p>Instally representa nossa missão pela simplificação da vida digital. Criamos esta plataforma
+                            com um objetivo claro: proporcionar uma experiência de instalação de aplicativos mais
+                            inteligente e eficaz.</p>
+                        <p>Acreditamos que a instalação manual de aplicativos é uma tarefa que consome tempo e energia
+                            desnecessários, a Instally nasceu do propósito de que a tecnologia deve ser uma aliada, não
+                            uma barreira.</p>
+                    </div>
+                </div>
+                <BoxesSvg className="boxes"/>
             </div>
-          </div>
-          <BoxesSvg className="boxes" />
-        </div>
-    </Container>
-  </Wrapper>
+        </Container>
+    </Wrapper>
 };
