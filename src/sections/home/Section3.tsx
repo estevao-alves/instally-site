@@ -148,7 +148,7 @@ export default function Section3() {
                     </div>
                     <Link href="/search">
                         <ActionButton text={"Search your app"} icon={false} downloadable={false}
-                                      style={{backgroundColor: "#1a1a1a", padding: "20px 100px"}}/>
+                                      style={{backgroundColor: "#1a1a1a"}}/>
                     </Link>
                 </div>
             </div>

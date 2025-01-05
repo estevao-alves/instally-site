@@ -5,6 +5,7 @@ import {Container} from "@/styles/layout"
 import InstallyGrayLogoSvg from "/public/installyGrayLogo.svg"
 import BrasilIconSvg from "/public/brazilFlag.svg"
 import HeartSvg from "@/assets/icons/heart.svg";
+import ShopBagSvg from "@/assets/icons/shop-bag.svg";
 import DownloadSvg from "@/assets/icons/download.svg";
 import ActionButton from "@/components/ActionButton";
 import Link from "next/link";
@@ -34,12 +35,6 @@ const Wrapper = styled.div`
             height: 100px;
         }
 
-        h3 {
-            font-size: 20px;
-            font-weight: 500;
-            margin: 0 0 10px;
-        }
-
         .number {
             display: flex;
             gap: 6px;
@@ -60,13 +55,26 @@ const Wrapper = styled.div`
         display: flex;
         flex-direction: row-reverse;
 
-        padding: 50px 0 0 0;
         justify-content: space-between;
 
         span {
             margin-top: auto;
             margin-right: 10px;
         }
+        
+        .support {
+            h3 {
+                font-size: 20px;
+                font-weight: 500;
+                margin: 0 0 18px;
+            }
+            
+            .support-links {
+                display: flex;
+                gap: 15px;
+            }
+        }
+        
     }
 
     @media (max-width: 991px) {
@@ -82,8 +90,10 @@ const Wrapper = styled.div`
     }
 
     @media (max-width: 480px) {
-        h3 {
-            font-size: 18px !important;
+        .support {
+            h3 {
+                font-size: 18px !important;
+            }
         }
 
         span {
@@ -98,7 +108,6 @@ export default function Footer() {
             <div className="content">
                 <div className="businessAndLinks">
                     <div className="installyGrayLogo"><InstallyGrayLogoSvg/></div>
-                    {/*<h3>Follow me</h3>*/}
                     <span>stayonlinedev@gmail.com</span>
                     {/*<div className="number">
               <div className="brasilIcon"><BrasilIconSvg /></div>
@@ -108,9 +117,20 @@ export default function Footer() {
             </div>
 
             <div className="author">
-                <a href="https://ko-fi.com/stay" target="_blank" style={{textDecoration: "none"}}>
-                    <ActionButton text="Donate" icon={<HeartSvg/>} downloadable={false}/>
-                </a>
+
+                {/*<div className="support">
+                    <h3>Support the project by:</h3>
+
+                    <div className="support-links">
+                        <a href="https://ko-fi.com/stay" target="_blank" style={{textDecoration: "none"}}>
+                            <ActionButton text="Donating" icon={<HeartSvg/>} downloadable={false}/>
+                        </a>
+                        <a href="https://ko-fi.com/stay" target="_blank" style={{textDecoration: "none"}}>
+                            <ActionButton text="Shopping" icon={<ShopBagSvg/>} downloadable={false}/>
+                        </a>
+                    </div>
+                </div>*/}
+
                 <span>Made with 💜 by <a href="https://www.estevaoalves.com/" target="_blank">Estevão Alves</a></span>
             </div>
         </Container>

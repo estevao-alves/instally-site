@@ -1,16 +1,21 @@
+'use client'
+
 import styled from "styled-components";
 
 import DownloadSvg from "@/assets/icons/download.svg";
+import { sendGAEvent} from "@next/third-parties/google";
 
 const Wrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    
+    span {
+    }
 
     svg {
         display: block;
         margin: auto;
-        height: 100%;
 
         margin-right: 16px;
 
@@ -48,6 +53,7 @@ export default function ActionButton({text, icon, style, downloadable = true}: I
         anchorTag.href = url;
         anchorTag.setAttribute("download", fileName);
         document.body.appendChild(anchorTag);
+        sendGAEvent({ eventName: "Download", url: url });
         anchorTag.click();
         anchorTag.remove();
     }
@@ -55,8 +61,8 @@ export default function ActionButton({text, icon, style, downloadable = true}: I
     return <Wrapper>
         <button className="cta" onClick={downloadable ? () => downloadFile(INSTALLY_EXE_URL) : () => {
         }} style={style}>
-            {!icon ? <DownloadSvg/> : icon}
-            {text || "Windows download"}
+            {downloadable ? <DownloadSvg/> : icon}
+            <span>{text || "Windows download"}</span>
         </button>
     </Wrapper>
 }

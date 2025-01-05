@@ -5,6 +5,7 @@ import GlobalStyle from '@/styles/globals'
 import StyledComponentsRegistry from '@/styles/styleRegistry'
 import ApplicationProvider from '@/context/ApplicationContext';
 import Head from "next/head";
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const font = Poppins({
     subsets: ["latin"],
@@ -52,6 +53,7 @@ export default function RootLayout({
             </ApplicationProvider>
         </StyledComponentsRegistry>
         </body>
+        <GoogleAnalytics gaId="G-9NX7LLG46T" />
         </html>
     );
 }

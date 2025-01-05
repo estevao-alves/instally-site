@@ -4,10 +4,9 @@ import styled from "styled-components";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 
-import LogoSvg from "public/logo.svg";
 import ExternalLinkSvg from "@/assets/icons/external-link.svg";
-import HeartSvg from "@/assets/icons/heart.svg";
-import ActionButton from "@/components/ActionButton";
+import LogoSvg from "/public/logo.svg";
+
 
 const Wrapper = styled.div`
     padding: 10px;
@@ -114,7 +113,7 @@ export default function Header() {
             title: "GitHub",
             pathname: "https://github.com/estevao-alves/Instally",
             target: "_blank",
-            icon: <ExternalLinkSvg/>
+            icon: <ExternalLinkSvg />
         },
     ];
 
@@ -123,7 +122,7 @@ export default function Header() {
     return <Wrapper>
         <Container>
             <div id="content" className="content">
-                <Link href="/"><LogoSvg/></Link>
+                <Link href="/"><LogoSvg /></Link>
                 <div className="options">
                     {menu.map((item, i) =>
                         <Link key={i} href={item.pathname} target={item.target}
