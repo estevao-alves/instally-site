@@ -1,20 +1,20 @@
-import {useContext, useEffect, useRef, useState} from "react";
-import {useSearchParams} from "next/navigation";
+import { useContext, useEffect, useRef, useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import SearchSVG from "@/assets/icons/search.svg";
 import ArrowDownSVG from "@/assets/icons/arrow-down.svg";
 
-import {Container} from "@/styles/layout";
-import {AppItemTypes} from "@/app/api/packages/route";
-import {api} from "@/services/api";
+import { Container } from "@/styles/layout";
+import { AppItemTypes } from "@/app/api/packages/route";
+import { api } from "@/services/api";
 import AppsSelectedBar from "@/components/AppsSelectedBar";
-import {ApplicationContext} from "@/context/ApplicationContext";
+import { ApplicationContext } from "@/context/ApplicationContext";
 import categories from "@/services/categories.json";
 
-import {Wrapper} from "./styles";
+import { Wrapper } from "./styles";
 import Apps from "./apps";
-import {AppDetails} from "@/app/search/appDetails";
+import { AppDetails } from "@/app/search/appDetails";
 
-export default function SearchSectionOne() {
+function SearchSectionContent() {
     const {
         appSelected,
         packages,
@@ -25,20 +25,16 @@ export default function SearchSectionOne() {
         infoSidebarVisibility
     } = useContext(ApplicationContext);
 
-    // Armazenando os pacotes em estado
     const [searchText, setSearchText] = useState("");
     const [dropdownToggle, setDropdownToggle] = useState(false);
     const [categorySelected, setCategorySelected] = useState<string[]>([]);
     const [categoryTitle, setCategoryTitle] = useState<string>("All");
 
-    // Funcao de busca
     async function getPackages(limit: number) {
         var categories: string[] = categorySelected;
 
         const request = await api.get(`/?limit=${limit}${categories.length ? `&categories=${categories}` : ""}${searchText ? `&search=${searchText}` : ""}`);
         const pkgs = await request.data as AppItemTypes[];
-
-        console.log("Packages" + pkgs);
 
         setpackages(pkgs);
     }
@@ -73,48 +69,60 @@ export default function SearchSectionOne() {
 
     useEffect(() => {
         loadAppsInLocalStorage();
-
         getPackages(30);
     }, [categorySelected, searchText])
 
-    return <>
+    return (
         <Wrapper dropdown={dropdownToggle} isInfoSidebarVisible={!!infoSidebarVisibility} onClick={() => {
-            if (dropdownToggle) setDropdownToggle(false)
+            if (dropdownToggle) setDropdownToggle(false);
         }}>
             <Container>
                 <h2>Check if your favorite app is available</h2>
                 <div className="searchOptions">
                     <form className="searchBox" onSubmit={handleSubmit}>
-                        <input ref={inputSearchRef} placeholder="Search"/>
-                        <button className="searchButton"><SearchSVG/></button>
+                        <input ref={inputSearchRef} placeholder="Search" />
+                        <button className="searchButton"><SearchSVG /></button>
                     </form>
 
                     <div className="filters">
                         <button className="categories" onClick={() => setDropdownToggle(!dropdownToggle)}>
-                            <span>{categoryTitle}</span><ArrowDownSVG/>
-                            {dropdownToggle ? <div className="dropdown">
-                                {categories.map(({title, tags}, i) => <span key={i} onClick={() => {
-                                    if (title !== categoryTitle) changeCategory(tags, title)
-                                }}>{title}</span>)}
-                            </div> : <></>}
+                            <span>{categoryTitle}</span><ArrowDownSVG />
+                            {dropdownToggle && (
+                                <div className="dropdown">
+                                    {categories.map(({ title, tags }, i) => (
+                                        <span key={i} onClick={() => {
+                                            if (title !== categoryTitle) changeCategory(tags, title);
+                                        }}>{title}</span>
+                                    ))}
+                                </div>
+                            )}
                         </button>
                     </div>
                 </div>
 
                 <div className="appList">
-                    <Apps/>
-                    {appSelected ? <AppDetails app={appSelected} getPackages={getPackages}/> : <></>}
+                    <Apps />
+                    {appSelected && <AppDetails app={appSelected} getPackages={getPackages} />}
                 </div>
 
-                {packages !== null ?
+                {packages !== null && (
                     <button className="searchMore" onClick={() => {
                         getPackages((packages?.length || 0) + 30);
                     }}>Show more</button>
-                    : <></>}
+                )}
 
-                {packagesAdded?.length > 0 ?
-                    <AppsSelectedBar appList={packagesAdded} removeApp={addOrRemoveApp}/> : <></>}
+                {packagesAdded?.length > 0 && (
+                    <AppsSelectedBar appList={packagesAdded} removeApp={addOrRemoveApp} />
+                )}
             </Container>
         </Wrapper>
-    </>
+    );
+}
+
+export default function SearchSectionOne() {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <SearchSectionContent />
+        </Suspense>
+    );
 }
