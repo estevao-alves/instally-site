@@ -5,7 +5,6 @@ import GlobalStyle from '@/styles/globals'
 import StyledComponentsRegistry from '@/styles/styleRegistry'
 import ApplicationProvider from '@/context/ApplicationContext';
 import Head from "next/head";
-import AdSense from "@/components/AdSense";
 
 const font = Poppins({
     subsets: ["latin"],
@@ -25,7 +24,6 @@ export default function RootLayout({
     return (
         <html lang="en">
         <Head>
-            {/* Google Tag Manager */}
             <script
                 async
                 dangerouslySetInnerHTML={{
@@ -36,10 +34,8 @@ export default function RootLayout({
                         })(window,document,'script','dataLayer','GTM-5KW5FQ7N');`,
                 }}
             />
-            {/* End Google Tag Manager */}
         </Head>
         <body className={font.className}>
-        {/* Google Tag Manager (noscript) */}
         <noscript>
             <iframe
                 src="https://www.googletagmanager.com/ns.html?id=GTM-5KW5FQ7N"
@@ -48,7 +44,6 @@ export default function RootLayout({
                 style={{ display: 'none', visibility: 'hidden' }}
             ></iframe>
         </noscript>
-        {/* End Google Tag Manager (noscript) */}
 
         <StyledComponentsRegistry>
             <ApplicationProvider>
