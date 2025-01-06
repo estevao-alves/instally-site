@@ -4,8 +4,8 @@ import {Poppins} from 'next/font/google'
 import GlobalStyle from '@/styles/globals'
 import StyledComponentsRegistry from '@/styles/styleRegistry'
 import ApplicationProvider from '@/context/ApplicationContext';
+import {GoogleAnalytics, GoogleTagManager} from '@next/third-parties/google'
 import Head from "next/head";
-import { GoogleAnalytics } from '@next/third-parties/google'
 
 const font = Poppins({
     subsets: ["latin"],
@@ -15,6 +15,7 @@ const font = Poppins({
 
 export const metadata: Metadata = {
     title: 'Instally',
+    description: 'Instally is a GUI interface for WinGet designed to simplify the application installation process.',
 }
 
 export default function RootLayout({
@@ -24,36 +25,27 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-        <Head>
-            <script
-                async
-                dangerouslySetInnerHTML={{
-                    __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-                        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                        })(window,document,'script','dataLayer','GTM-5KW5FQ7N');`,
-                }}
-            />
-        </Head>
         <body className={font.className}>
-        <noscript>
-            <iframe
-                src="https://www.googletagmanager.com/ns.html?id=GTM-5KW5FQ7N"
-                height="0"
-                width="0"
-                style={{ display: 'none', visibility: 'hidden' }}
-            ></iframe>
-        </noscript>
-
+        <Head>
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-9NX7LLG46T"></script>
+            <script dangerouslySetInnerHTML={{
+                __html: `
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+                            gtag('config', 'G-9NX7LLG46T');
+                        `
+            }} />
+        </Head>
         <StyledComponentsRegistry>
             <ApplicationProvider>
                 {children}
                 <GlobalStyle />
             </ApplicationProvider>
         </StyledComponentsRegistry>
-        </body>
         <GoogleAnalytics gaId="G-9NX7LLG46T" />
+        <GoogleTagManager gtmId="GTM-5KW5FQ7N" />
+        </body>
         </html>
     );
 }
