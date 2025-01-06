@@ -26,26 +26,15 @@ export default function RootLayout({
     return (
         <html lang="en">
         <body className={font.className}>
-        <Head>
-            <script async src="https://www.googletagmanager.com/gtag/js?id=G-9NX7LLG46T"></script>
-            <script dangerouslySetInnerHTML={{
-                __html: `
-                            window.dataLayer = window.dataLayer || [];
-                            function gtag(){dataLayer.push(arguments);}
-                            gtag('js', new Date());
-                            gtag('config', 'G-9NX7LLG46T');
-                        `
-            }} />
-        </Head>
         <StyledComponentsRegistry>
             <ApplicationProvider>
                 {children}
                 <GlobalStyle />
             </ApplicationProvider>
         </StyledComponentsRegistry>
+        </body>
         <GoogleAnalytics gaId="G-9NX7LLG46T" />
         <GoogleTagManager gtmId="GTM-5KW5FQ7N" />
-        </body>
         </html>
     );
 }
