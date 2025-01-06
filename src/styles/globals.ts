@@ -90,12 +90,12 @@ const GlobalStyle = createGlobalStyle`
         background-color: var(--purple-violet);
         color: var(--white);
 
-        padding: 14px 38px;
+        
+        
         display: flex;
 
         border-radius: 40px;
         align-self: center;
-        font-size: 20px;
         font-weight: bold;
         text-transform: uppercase;
 

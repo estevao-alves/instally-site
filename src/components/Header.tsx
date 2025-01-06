@@ -43,6 +43,7 @@ const Wrapper = styled.div`
 
             svg {
                 bottom: -5px;
+                margin: 0;
                 position: absolute;
             }
         }
@@ -75,9 +76,9 @@ const Wrapper = styled.div`
         }
     }
 
-    @media (max-width: 576px) {
+    @media (max-width: 991px) {
         svg {
-            margin-left: -10px;
+            margin-left: 10px;
             scale: 0.8;
         }
 
@@ -89,11 +90,21 @@ const Wrapper = styled.div`
             }
         }
     }
+    @media (max-width: 576px) {
+        
+        .content {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .options {
+            margin: auto 0;
+        }
+    }
 
     @media (max-width: 480px) {
         svg {
-            margin-left: -30px;
-            margin-right: 20px;
+            margin-right: 10px;
             scale: 0.7;
         }
 
