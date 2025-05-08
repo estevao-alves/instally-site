@@ -75,7 +75,7 @@ export async function PUT() {
 
 
         // Caracteres estrangeiros
-        if (AllowedCharacter(pkg.Latest.Name) === null) return null;
+        // if (AllowedCharacter(pkg.Latest.Name) === null) return null;
 
         // Construção
         return {
