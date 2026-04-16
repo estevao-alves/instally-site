@@ -2,8 +2,11 @@
   "name": "instally-site",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20"
+  },
   "dependencies": {
-    "@next/third-parties": "^15.1.3",
+    "@next/third-parties": "^15.0.0",
     "@svgr/webpack": "^8.1.0",
     "@types/node": "20.5.9",
     "@types/react": "18.2.21",
@@ -12,7 +15,7 @@
     "eslint": "8.48.0",
     "eslint-config-next": "13.4.19",
     "mongodb": "^6.1.0",
-    "next": "^15.1.3",
+    "next": "^16.2.3",
     "nextjs-google-analytics": "^2.3.7",
     "open-graph-scraper": "^6.2.2",
     "react": "18.2.0",
@@ -22,12 +25,27 @@
     "uuid": "^11.0.3"
   },
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "next dev --webpack",
+    "build": "next build --webpack",
     "start": "next start",
     "lint": "next lint"
   },
   "devDependencies": {
     "cross-env": "^7.0.3"
-  }
+  },
+  "description": "instally site",
+  "main": "next.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/estevao-alves/instally-site.git"
+  },
+  "keywords": [
+    "instally"
+  ],
+  "author": "Stay",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/estevao-alves/instally-site/issues"
+  },
+  "homepage": "https://github.com/estevao-alves/instally-site#readme"
 }

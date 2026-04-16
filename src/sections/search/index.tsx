@@ -4,7 +4,7 @@ import SearchSVG from "@/assets/icons/search.svg";
 import ArrowDownSVG from "@/assets/icons/arrow-down.svg";
 
 import { Container } from "@/styles/layout";
-import { AppItemTypes } from "@/app/api/packages/route";
+import { Package } from "@/app/api/packages/route";
 import { api } from "@/services/api";
 import AppsSelectedBar from "@/components/AppsSelectedBar";
 import { ApplicationContext } from "@/context/ApplicationContext";
@@ -34,7 +34,7 @@ function SearchSectionContent() {
         var categories: string[] = categorySelected;
 
         const request = await api.get(`/?limit=${limit}${categories.length ? `&categories=${categories}` : ""}${searchText ? `&search=${searchText}` : ""}`);
-        const pkgs = await request.data as AppItemTypes[];
+        const pkgs = await request.data as Package[];
 
         setpackages(pkgs);
     }

@@ -3,7 +3,7 @@ import AlertSVG from "@/assets/icons/alert.svg";
 
 import {Wrapper} from "./styles/apps";
 import {grabFirstLetters} from "@/helpers/format";
-import {AppItemTypes} from "@/app/api/packages/route";
+import {Package} from "@/app/api/packages/route";
 import {ApplicationContext} from "@/context/ApplicationContext";
 
 export default function Apps() {
@@ -17,16 +17,16 @@ export default function Apps() {
     return <Wrapper>
         <div className="searchResult">
             {packages === null ? <div className="loading" style={{margin: "auto"}}/>
-                : packages.map((item: AppItemTypes, i: number) => {
+                : packages.map((item: Package, i: number) => {
 
-                    const alreadySelected = appSelected?.WingetId === item.WingetId;
+                    const alreadySelected = appSelected?.PackageIds.Winget === item.PackageIds.Winget;
 
                     const iconImg = !!item?.Site ?
-                        <img src={`/icons/${item.WingetId}.png`} alt=""/>
+                        <img src={`/icons/${item.PackageIds.Winget}.png`} alt=""/>
                         : <span>{grabFirstLetters(item.Name)}</span>;
 
                     return <div key={i}
-                                className={`item${(packagesAdded.filter((pkg) => pkg.WingetId === item.WingetId).length > 0) ? " selected" : ""}`}>
+                                className={`item${(packagesAdded.filter((pkg) => pkg.PackageIds.Winget === item.PackageIds.Winget).length > 0) ? " selected" : ""}`}>
                         <div className="clickArea" onClick={() => addOrRemoveApp(item)}></div>
                         <div className="icon">
                             {iconImg}

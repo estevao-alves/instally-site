@@ -1,4 +1,4 @@
-import {AppItemTypes} from "@/app/api/packages/route";
+import {Package} from "@/app/api/packages/route";
 import styled from "styled-components";
 
 import TimesSVG from "@/assets/icons/times.svg";
@@ -93,8 +93,8 @@ const Wrapper = styled.div`
 `;
 
 interface ComponentTypes {
-    appList: AppItemTypes[],
-    removeApp: (item: AppItemTypes) => void
+    appList: Package[],
+    removeApp: (item: Package) => void
 }
 
 export default function AppsSelectedBar({appList, removeApp}: ComponentTypes) {
@@ -104,7 +104,7 @@ export default function AppsSelectedBar({appList, removeApp}: ComponentTypes) {
             <div className="apps">
                 {appList.map((item, i: number) => {
                     return <div key={i} className="item" onClick={() => removeApp(item)}>
-                        <img src={`/icons/${item.WingetId}.png`}/>
+                        <img src={`/icons/${item.PackageIds.Winget}.png`}/>
                         <TimesSVG/>
                     </div>
                 })}

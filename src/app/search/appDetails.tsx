@@ -2,13 +2,13 @@ import {useContext, useEffect, useState} from "react";
 import TagSvg from "@/assets/icons/tag.svg";
 import TimesSvg from "@/assets/icons/times.svg";
 
-import {AppItemTypes} from "../api/packages/route";
+import {Package} from "../api/packages/route";
 import {Wrapper} from "./styles/appDetails";
 import {api} from "@/services/api";
 import {ApplicationContext} from "@/context/ApplicationContext";
 
 interface IAppDetails {
-    app: AppItemTypes,
+    app: Package,
     getPackages: any
 }
 
@@ -33,10 +33,10 @@ export function AppDetails({app, getPackages}: IAppDetails) {
         <div className="content">
             {appThumbnail ? <div className="ogImage" style={{backgroundImage: `url(${appThumbnail})`}}/> : <></>}
             <div className="title">
-                <img src={`/icons/${app.WingetId}.png`}/>
+                <img src={`/icons/${app.PackageIds.Winget}.png`}/>
                 <div className="rightContent">
                     <span>{app.LatestVersion}</span>
-                    <span>{app.WingetId}</span>
+                    <span>{app.PackageIds.Winget}</span>
                 </div>
             </div>
             <p className="description">{app.Description}</p>
@@ -56,7 +56,7 @@ export function AppDetails({app, getPackages}: IAppDetails) {
 
             <TimesSvg className="close" onClick={() => {
                 packages?.map((item) => {
-                    if (appSelected?.WingetId === item.WingetId) setAppSelected(null);
+                    if (appSelected?.PackageIds.Winget === item.PackageIds.Winget) setAppSelected(null);
                 })
             }}/>
         </div>
