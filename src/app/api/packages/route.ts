@@ -4,6 +4,8 @@ import nameListMostSearched from "@/services/winget/nameslist-most-searched.json
 import {AllowedCharacter} from "@/services/winget/helpers";
 import {v4 as uuidv4} from "uuid";
 
+
+// Rollback
 export type AppItemTypes = {
     WingetId: string,
     Name: string,
@@ -17,7 +19,6 @@ export type AppItemTypes = {
 }
 
 export async function GET(request: Request) {
-    // Params constructors
     const {searchParams} = new URL(request.url);
 
     // Query params
