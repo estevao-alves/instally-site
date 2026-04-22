@@ -3,9 +3,12 @@ import packages from "@/services/packages.json";
 import nameListMostSearched from "@/services/nameslist-most-searched.json";
 import { AllowedCharacter } from "@/services/helpers";
 import { v4 as uuidv4 } from "uuid";
-
 import fs from "fs/promises";
 import path from "path";
+
+import { promisify } from "util";
+import { gunzip } from "zlib";
+const gunzipAsync = promisify(gunzip);
 
 export type Package = {
     Guid: string,
@@ -17,6 +20,8 @@ export type Package = {
     VersionsLength: number,
     LatestVersion: string,
     Score: number,
+    Icon?: string,
+    Screenshots?: string[];
     PackageIds: {
         Winget?: string,
         Flatpak?: string,
@@ -37,7 +42,7 @@ export async function GET(request: Request) {
     const categories = searchParams.get("categories");
     const search = searchParams.get("search") || "";
 
-    let pkgs: any[] = packages;
+    let pkgs: any[] = packages as Package[];
 
     // filter by category
     if (categories) {
@@ -114,6 +119,21 @@ function mergePackages(sources: Package[][]) {
                     ...existing.PackageIds,
                     ...pkg.PackageIds
                 };
+
+                // Fill missing fields only
+                existing.Description ||= pkg.Description;
+                existing.Publisher ||= pkg.Publisher;
+                existing.Site ||= pkg.Site;
+                existing.LatestVersion ||= pkg.LatestVersion;
+                existing.VersionsLength ||= pkg.VersionsLength;
+                existing.Score ||= pkg.Score;
+
+                // Merge tags (avoid duplicates)
+                existing.Tags = Array.from(new Set([
+                    ...(existing.Tags || []),
+                    ...(pkg.Tags || [])
+                ]));
+
             } else {
                 map.set(key, { ...pkg });
             }
@@ -173,42 +193,91 @@ async function fetchWingetPackages(): Promise<Package[]> {
 // ------ FLATPAK ------
 
 async function fetchFlatpakPackages(): Promise<Package[]> {
-    let page = 1;
-    const perPage = 100;
-    let raw: any[] = [];
+    // 1. download xml.gz
+    const res = await fetch("https://flathub.org/repo/appstream/x86_64/appstream.xml.gz");
+    const buffer = Buffer.from(await res.arrayBuffer());
 
-    while (true) {
-        const res = await fetch("https://flathub.org/api/v2/search", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                query: "",
-                page,
-                per_page: perPage
-            })
+    // 2. unzip
+    const xmlBuffer = await gunzipAsync(buffer as any);
+    const xml = xmlBuffer.toString();
+
+    // 3. split components (cheap parsing)
+    const components = xml.split("<component");
+
+    const result: Package[] = [];
+
+    for (const chunk of components) {
+        // only real apps
+        if (!/type="desktop/.test(chunk)) continue;
+
+        const idMatch = chunk.match(/<id>(.*?)<\/id>/);
+        const nameMatch = chunk.match(/<name>(.*?)<\/name>/);
+        const summaryMatch = chunk.match(/<summary>(.*?)<\/summary>/);
+        const descMatch = chunk.match(/<description>([\s\S]*?)<\/description>/);
+        const devMatch = chunk.match(/<developer_name>(.*?)<\/developer_name>/);
+        const siteMatch = chunk.match(/<url type="homepage">(.*?)<\/url>/);
+        const versionMatch = chunk.match(/<release[^>]*version="(.*?)"/);
+        const iconMatch = chunk.match(/<icon type="remote">(.*?)<\/icon>/);
+        const stockIconMatch = chunk.match(/<icon type="stock">(.*?)<\/icon>/);
+        const icon =
+            iconMatch?.[1] ||
+            (stockIconMatch
+                ? `https://dl.flathub.org/repo/appstream/x86_64/icons/128x128/${stockIconMatch[1]}.png`
+                : "");
+
+        const screenshots: string[] = [];
+        const imgRegex = /<image>(.*?)<\/image>/g;
+
+        let iMatch;
+        while ((iMatch = imgRegex.exec(chunk)) !== null) {
+            screenshots.push(iMatch[1]);
+        }
+
+        const keywordMatches: string[] = [];
+        const keywordRegex = /<keyword>(.*?)<\/keyword>/g;
+
+        let kMatch;
+        while ((kMatch = keywordRegex.exec(chunk)) !== null) {
+            keywordMatches.push(kMatch[1]);
+        }
+
+        // categories (multiple)
+        const categoryMatches: string[] = [];
+        const regex = /<category>(.*?)<\/category>/g;
+
+        let match;
+        while ((match = regex.exec(chunk)) !== null) {
+            categoryMatches.push(match[1]);
+        }
+
+        if (!idMatch || !nameMatch) continue;
+
+        // clean description (remove html tags)
+        const cleanDescription = (descMatch?.[1] || summaryMatch?.[1] || "")
+            .replace(/<[^>]*>/g, "")
+            .trim();
+
+        result.push({
+            Guid: uuidv4(),
+            Name: nameMatch[1],
+            Publisher: devMatch?.[1] || "",
+            Tags: Array.from(new Set([
+                ...categoryMatches,
+                ...keywordMatches
+            ])),
+            Description: cleanDescription,
+            Site: siteMatch?.[1] || "",
+            Icon: icon,
+            VersionsLength: versionMatch ? 1 : 0,
+            LatestVersion: versionMatch?.[1] || "",
+            Score: 0,
+            PackageIds: {
+                Flatpak: idMatch[1]
+            },
         });
-
-        const json = await res.json();
-        const apps = json?.hits || [];
-
-        if (!apps.length) break;
-
-        raw.push(...apps);
-        page++;
     }
 
-    return raw.map((app: any) => ({
-        Guid: uuidv4(),
-        Name: app.name || "",
-        Publisher: app.developer_name || "",
-        Tags: [],
-        Description: app.summary || "",
-        Site: app.homepage || "",
-        VersionsLength: 1,
-        LatestVersion: "",
-        Score: 0,
-        PackageIds: {
-            Flatpak: app.app_id
-        }
-    }));
+    console.log("Total Flatpak apps:", result.length);
+
+    return result;
 }
