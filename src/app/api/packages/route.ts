@@ -239,7 +239,7 @@ async function fetchFlatpakPackages(): Promise<Package[]> {
                 : "");
 
         const screenshots: string[] = [];
-        const imgRegex = /<image>(.*?)<\/image>/g;
+        const imgRegex = /<image[^>]*>(.*?)<\/image>/g;
 
         let iMatch;
         while ((iMatch = imgRegex.exec(chunk)) !== null) {
