@@ -83,8 +83,6 @@ export async function PUT() {
         await fs.writeFile(filePath, JSON.stringify(merged, null, 2));
 
         return NextResponse.json(merged);
-
-
     } catch (err: any) {
         console.error("PUT /api/packages error:", err);
 
@@ -100,6 +98,12 @@ export async function PUT() {
 
 
 // ------ GLOBAL ------
+
+function containsNonLatin(values: (string | undefined)[]): boolean {
+    return values.some(value =>
+        /[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uac00-\ud7af\u0600-\u06ff\u0400-\u04ff]/.test(value || "")
+    );
+}
 
 function normalizeName(name: string) {
     return name?.toLowerCase().replace(/[^a-z0-9]/g, "");
@@ -158,6 +162,15 @@ async function fetchWingetPackages(): Promise<Package[]> {
 
     const result = (await Promise.all(
         data.map(async (pkg: any) => {
+
+            // Remove Non latin characters from tags
+            if (containsNonLatin([
+                ...(pkg.Latest.Tags || [])
+            ])) {
+                return;
+            }
+            //
+
             if (names.includes(pkg.Latest.Name)) return;
             names.push(pkg.Latest.Name);
 
@@ -252,10 +265,56 @@ async function fetchFlatpakPackages(): Promise<Package[]> {
 
         if (!idMatch || !nameMatch) continue;
 
-        // clean description (remove html tags)
+        // clean description (handling html tags) -----
         const cleanDescription = (descMatch?.[1] || summaryMatch?.[1] || "")
-            .replace(/<[^>]*>/g, "")
-            .trim();
+
+        // decode common entities
+        .replace(/&amp;/g, "&")
+        .replace(/&lt;/g, "<")
+        .replace(/&gt;/g, ">")
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'")
+
+        // unordered lists
+        .replace(/<ul>/g, "\n")
+        .replace(/<\/ul>/g, "\n")
+
+        // ordered lists
+        .replace(/<ol>/g, "\n")
+        .replace(/<\/ol>/g, "\n")
+
+        // bullet items
+        .replace(/<li>/g, "• ")
+        .replace(/<\/li>/g, "\n")
+
+        // paragraphs
+        .replace(/<p>/g, "")
+        .replace(/<\/p>/g, "\n\n")
+
+        // line breaks
+        .replace(/<br\s*\/?>/g, "\n")
+
+        // emphasis/style tags (remove only)
+        .replace(/<\/?(em|strong|code|b|i)>/g, "")
+
+        // remove anything remaining
+        .replace(/<[^>]*>/g, "")
+
+        // normalize spaces
+        .replace(/[ \t]+\n/g, "\n")
+        .replace(/\n{3,}/g, "\n\n")
+
+        .trim();
+        // ------
+
+        // Remove Non latin characters from tags
+        if (containsNonLatin([
+            ...categoryMatches,
+            ...keywordMatches
+            ])) {
+            continue;
+        }
+        //
 
         result.push({
             Guid: uuidv4(),
