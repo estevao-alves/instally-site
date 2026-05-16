@@ -279,11 +279,11 @@ async function fetchFlatpakPackages(): Promise<Package[]> {
         .replace(/<\/li>/g, "\n")
 
         // paragraphs
-        .replace(/<\/p>/g, "\n")
-        .replace(/<\/p>/g, "\n\n")
+        .replace(/<p>/g, "\n")
+        .replace(/<\/p>/g, "\n\n\n")
 
         // line breaks
-        .replace(/<br\s*\/?>/g, "\n")
+        .replace(/<br\s*\/?>/g, "\n\n")
 
         // remove formatting tags
         .replace(/<\/?(ul|ol|p|em|strong|code|b|i)>/g, "")
