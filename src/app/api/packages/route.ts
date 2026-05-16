@@ -99,9 +99,9 @@ export async function PUT() {
 
 // ------ GLOBAL ------
 
-function containsNonLatin(values: (string | undefined)[]): boolean {
-    return values.some(value =>
-        /[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uac00-\ud7af\u0600-\u06ff\u0400-\u04ff]/.test(value || "")
+function cleanTags(tags: string[] = []): string[] {
+    return tags.filter(tag =>
+        !/[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uac00-\ud7af\u0600-\u06ff\u0400-\u04ff]/.test(tag)
     );
 }
 
@@ -133,10 +133,12 @@ function mergePackages(sources: Package[][]) {
                 existing.Score ||= pkg.Score;
 
                 // Merge tags (avoid duplicates)
-                existing.Tags = Array.from(new Set([
-                    ...(existing.Tags || []),
-                    ...(pkg.Tags || [])
-                ]));
+                existing.Tags = cleanTags(
+                    Array.from(new Set([
+                        ...(existing.Tags || []),
+                        ...(pkg.Tags || [])
+                    ]))
+                );
 
             } else {
                 map.set(key, { ...pkg });
@@ -162,15 +164,6 @@ async function fetchWingetPackages(): Promise<Package[]> {
 
     const result = (await Promise.all(
         data.map(async (pkg: any) => {
-
-            // Remove Non latin characters from tags
-            if (containsNonLatin([
-                ...(pkg.Latest.Tags || [])
-            ])) {
-                return;
-            }
-            //
-
             if (names.includes(pkg.Latest.Name)) return;
             names.push(pkg.Latest.Name);
 
@@ -306,15 +299,6 @@ async function fetchFlatpakPackages(): Promise<Package[]> {
 
         .trim();
         // ------
-
-        // Remove Non latin characters from tags
-        if (containsNonLatin([
-            ...categoryMatches,
-            ...keywordMatches
-            ])) {
-            continue;
-        }
-        //
 
         result.push({
             Guid: uuidv4(),
