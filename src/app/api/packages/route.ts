@@ -264,6 +264,9 @@ async function fetchFlatpakPackages(): Promise<Package[]> {
         // clean description (handling html tags) -----
         const cleanDescription = (descMatch?.[1] || summaryMatch?.[1] || "")
 
+        // remove xml formatting newlines
+        .replace(/\r?\n\s*/g, " ")
+
         // decode entities
         .replace(/&amp;/g, "&")
         .replace(/&lt;/g, "<")
