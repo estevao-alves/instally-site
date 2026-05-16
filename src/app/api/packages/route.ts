@@ -276,7 +276,7 @@ async function fetchFlatpakPackages(): Promise<Package[]> {
 
         // bullet items
         .replace(/<li>/g, "• ")
-        .replace(/<\/li>/g, "\n")
+        .replace(/<\/li>/g, "\n\n")
 
         // paragraphs
         .replace(/<p>/g, "\n")
