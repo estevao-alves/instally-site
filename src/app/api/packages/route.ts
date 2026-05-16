@@ -101,7 +101,7 @@ export async function PUT() {
 
 function cleanTags(tags: string[] = []): string[] {
     return tags.filter(tag =>
-        !/[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uac00-\ud7af\u0600-\u06ff\u0400-\u04ff]/.test(tag)
+        /^[a-zA-Z0-9\s.,\-_'":;!?()&+/\\[\]{}@#%*|<>~=à-ÿÀ-Ÿ]+$/.test(tag)
     );
 }
 
@@ -141,7 +141,10 @@ function mergePackages(sources: Package[][]) {
                 );
 
             } else {
-                map.set(key, { ...pkg });
+                map.set(key, {
+                    ...pkg,
+                    Tags: cleanTags(pkg.Tags || [])
+                });
             }
         }
     }
