@@ -101,7 +101,7 @@ export async function PUT() {
 
 function cleanTags(tags: string[] = []): string[] {
     return tags.filter(tag =>
-        /^[a-zA-Z0-9\s.,\-_'":;!?()&+/\\[\]{}@#%*|<>~=à-ÿÀ-Ÿ]+$/.test(tag)
+        /^[a-zA-Z0-9\s]+$/.test(tag)
     );
 }
 
@@ -264,40 +264,36 @@ async function fetchFlatpakPackages(): Promise<Package[]> {
         // clean description (handling html tags) -----
         const cleanDescription = (descMatch?.[1] || summaryMatch?.[1] || "")
 
-        // decode common entities
+        // decode entities
         .replace(/&amp;/g, "&")
         .replace(/&lt;/g, "<")
         .replace(/&gt;/g, ">")
         .replace(/&quot;/g, '"')
         .replace(/&#39;/g, "'")
 
-        // unordered lists
-        .replace(/<ul>/g, "\n")
-        .replace(/<\/ul>/g, "\n")
-
-        // ordered lists
-        .replace(/<ol>/g, "\n")
-        .replace(/<\/ol>/g, "\n")
-
         // bullet items
         .replace(/<li>/g, "• ")
         .replace(/<\/li>/g, "\n")
 
         // paragraphs
-        .replace(/<p>/g, "")
-        .replace(/<\/p>/g, "\n\n")
+        .replace(/<\/p>/g, "\n")
 
         // line breaks
         .replace(/<br\s*\/?>/g, "\n")
 
-        // emphasis/style tags (remove only)
-        .replace(/<\/?(em|strong|code|b|i)>/g, "")
+        // remove formatting tags
+        .replace(/<\/?(ul|ol|p|em|strong|code|b|i)>/g, "")
 
-        // remove anything remaining
+        // remove remaining tags
         .replace(/<[^>]*>/g, "")
 
-        // normalize spaces
-        .replace(/[ \t]+\n/g, "\n")
+        // collapse spaces
+        .replace(/[ \t]+/g, " ")
+
+        // trim spaces around newlines
+        .replace(/ *\n */g, "\n")
+
+        // collapse excessive newlines
         .replace(/\n{3,}/g, "\n\n")
 
         .trim();
