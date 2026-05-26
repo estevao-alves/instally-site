@@ -14,7 +14,7 @@ export default async function Form() {
                 <input type="text" placeholder="Nome"></input>
                 <input type="email" placeholder="E-mail"></input>
                 <input type="text" className="message" placeholder="Como podemos te ajudar?"></input>
-                <ActionButton customText="Enviar" icon={false}/>
+                <ActionButton customText="Enviar" icon={<></>}/>
             </div>
         </Container>
     </Wrapper>
