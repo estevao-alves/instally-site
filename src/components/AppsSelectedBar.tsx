@@ -26,14 +26,15 @@ const Wrapper = styled.div`
     .apps {
       display: flex;
       padding-left: 14px;
+      overflow: scroll;
       
       .item {
+        flex-shrink: 0;
         background-color: rgb(60, 60, 70, .4);
         padding: 12px;
         margin-right: 10px;
         border-radius: 10px;
         
-        width: 100%;
         max-width: var(--size);
         max-height: var(--size);
 
@@ -77,18 +78,6 @@ const Wrapper = styled.div`
         }
       }
     }
-
-    .install {
-      background-color: var(--purple-violet);
-      color: var(--white);
-      height: 100%;
-      margin-left: auto;
-      margin-right: 20px;
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-size: 20px;
-      font-weight: bold;
-    }
   }
 `;
 
@@ -110,8 +99,12 @@ export default function AppsSelectedBar({appList, removeApp}: ComponentTypes) {
                 })}
             </div>
 
-            <ActionButton className="install" style={{padding: "12px 30px", borderRadius: "8px", marginRight: "20px"}}
-                          text="Instally" icon={false}/>
+            <div>
+              <ActionButton
+                  style={{padding: "12px 30px", borderRadius: "8px", marginRight: "20px"}}
+                  customText="Instally"
+                  />
+            </div>
         </div>
     </Wrapper>
 }

@@ -170,7 +170,7 @@ export default function Section1() {
         <Container>
             <div className="content">
                 <h1>Install multiple apps with <span>One Click</span></h1>
-                <p>A simple open source tool to install and manage your apps on Windows and Linux</p>
+                <p>A open source tool to install and manage your apps on Windows and Linux</p>
                 <ActionButton hasDropdown={true} />
             </div>
 

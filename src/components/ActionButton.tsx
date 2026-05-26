@@ -19,7 +19,7 @@ const Wrapper = styled.div<{ size?: Size; hasDropdown?: boolean}>`
     width: fit-content;
     margin: 0 auto;
     
-    z-index: 9999;
+    z-index: 10;
     
     .cta {
         display: flex;
