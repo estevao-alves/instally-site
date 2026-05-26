@@ -77,7 +77,8 @@ function SearchSectionContent() {
             if (dropdownToggle) setDropdownToggle(false);
         }}>
             <Container>
-                <h2>Check if your favorite app is available</h2>
+                <h2>Winget apps search</h2>
+                <h3>*Flatpak search is only available inside Instally</h3>
                 <div className="searchOptions">
                     <form className="searchBox" onSubmit={handleSubmit}>
                         <input ref={inputSearchRef} placeholder="Search" />

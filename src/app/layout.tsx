@@ -18,23 +18,20 @@ export const metadata: Metadata = {
     description: 'Instally is a GUI interface for WinGet designed to simplify the application installation process.',
 }
 
-export default function RootLayout({
-                                       children,
-                                   }: {
-    children: React.ReactNode;
-}) {
+export default function RootLayout({children,} : {children: React.ReactNode;}) {
     return (
-        <html lang="en">
-        <body className={font.className}>
-        <StyledComponentsRegistry>
-            <ApplicationProvider>
-                {children}
-                <GlobalStyle />
-            </ApplicationProvider>
-        </StyledComponentsRegistry>
-        </body>
-        <GoogleAnalytics gaId="G-9NX7LLG46T" />
-        <GoogleTagManager gtmId="GTM-5KW5FQ7N" />
+        <html lang="en" suppressHydrationWarning>
+            <body className={`${font.className} ${font.variable}`}>
+                <StyledComponentsRegistry>
+                    <ApplicationProvider>
+                        {children}
+                        <GlobalStyle />
+                    </ApplicationProvider>
+                </StyledComponentsRegistry>
+
+                <GoogleAnalytics gaId="G-9NX7LLG46T" />
+                <GoogleTagManager gtmId="GTM-5KW5FQ7N" />
+            </body>
         </html>
     );
 }

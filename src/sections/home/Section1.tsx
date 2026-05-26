@@ -14,7 +14,6 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     position: relative;
-    overflow: hidden;
 
     .content {
         margin: 0 auto;
@@ -44,7 +43,7 @@ const Wrapper = styled.div`
 
     svg.elementSvg {
         position: absolute;
-        bottom: -10px;
+        bottom: 0;
         height: 100%;
         max-height: 38vw;
     }
@@ -171,9 +170,8 @@ export default function Section1() {
         <Container>
             <div className="content">
                 <h1>Install multiple apps with <span>One Click</span></h1>
-                <p>Instally is an Open Source project designed to simplify the app installation process, allowing you to
-                    install several apps at once effortlessly.</p>
-                <ActionButton/>
+                <p>A simple open source tool to install and manage your apps on Windows and Linux</p>
+                <ActionButton hasDropdown={true} />
             </div>
 
             <BoyJumpingSvg className="elementSvg leftImage"/>

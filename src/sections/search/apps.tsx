@@ -25,13 +25,12 @@ export default function Apps() {
                         <img src={`/icons/${item.PackageIds.Winget}.png`} alt=""/>
                         : <span>{grabFirstLetters(item.Name)}</span>;
 
-                    return <div key={i}
-                                className={`item${(packagesAdded.filter((pkg) => pkg.PackageIds.Winget === item.PackageIds.Winget).length > 0) ? " selected" : ""}`}>
-                        <div className="clickArea" onClick={() => addOrRemoveApp(item)}></div>
-                        <div className="icon">
-                            {iconImg}
-                        </div>
-                        <h3>{item.Name}</h3>
+                        return <div key={i} className={`item${(packagesAdded.filter((pkg) => pkg.PackageIds.Winget === item.PackageIds.Winget).length > 0) ? " selected" : ""}`}>
+                            <div className="clickArea" onClick={() => addOrRemoveApp(item)}></div>
+                            <div className="icon">
+                                {iconImg}
+                            </div>
+                            <h3>{item.Name}</h3>
                         <AlertSVG className={`infoSvg${alreadySelected ? " active" : ""}`}
                                   onClick={() => setAppSelected(alreadySelected ? null : item)}/>
                     </div>

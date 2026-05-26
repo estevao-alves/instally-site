@@ -137,7 +137,6 @@ export default function Section2() {
                         <h2>Create your <span>collections.</span></h2>
                         <p>Organize your apps into collections. Keep your apps organized, updated and always at hand</p>
                     </div>
-                    <ActionButton/>
                 </div>
                 <CollectionsSvg className="collection"/>
             </div>

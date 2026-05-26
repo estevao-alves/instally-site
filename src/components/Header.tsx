@@ -120,6 +120,7 @@ export default function Header() {
     const menu = [
         {title: "Home", pathname: "/",},
         {title: "Search", pathname: "/search",},
+        // {title: "About", pathname: "/about",},
         {
             title: "GitHub",
             pathname: "https://github.com/estevao-alves/Instally",
