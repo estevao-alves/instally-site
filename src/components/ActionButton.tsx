@@ -8,11 +8,11 @@ import DownloadSvg from "@/assets/icons/download.svg";
 import ArrowDownSVG from "@/assets/icons/arrow-down.svg";
 
 import { sendGAEvent } from "@next/third-parties/google";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 export type Size = "small" | "medium" | "large";
 
-const Wrapper = styled.div<{ size?: Size; hasDropdown?: boolean}>`
+const Wrapper = styled.div<{ $size?: Size; $hasDropdown?: boolean}>`
     position: relative;
     display: flex;
     align-items: stretch;
@@ -20,23 +20,33 @@ const Wrapper = styled.div<{ size?: Size; hasDropdown?: boolean}>`
     margin: 0 auto;
     
     z-index: 10;
+
+    opacity: 0;
+    scale: .9;
+    transform: translateY(5px);
+    transition: opacity 300ms ease, transform 300ms ease;
     
+    &.os-ready {
+        scale: 1;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
     .cta {
         display: flex;
         align-items: center;
         gap: 18px;
         white-space: nowrap;
-
         margin-right: 6px;
-
-        ${({ hasDropdown }) => !hasDropdown && `border-radius: 22px`}
+            
+        ${({ $hasDropdown }) => !$hasDropdown && `border-radius: 22px`}
     }
 
     .dialog-arrow {
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: var(--purple-simple);
+        background-color: var(--purple-violet);
         border-top-right-radius: 22px;
         border-bottom-right-radius: 22px;
 
@@ -106,7 +116,7 @@ const Wrapper = styled.div<{ size?: Size; hasDropdown?: boolean}>`
         }
     }
 
-    ${({ size }) => size == "large" &&`
+    ${({ $size }) => $size == "large" &&`
         .cta {
             padding: 14px 30px;
             font-size: 20px;
@@ -122,7 +132,7 @@ const Wrapper = styled.div<{ size?: Size; hasDropdown?: boolean}>`
         }
     `};
 
-    ${({ size }) => size == "medium" &&`
+    ${({ $size }) => $size == "medium" &&`
         .cta {
             padding: 10px 20px;
             font-size: 16px;
@@ -138,7 +148,7 @@ const Wrapper = styled.div<{ size?: Size; hasDropdown?: boolean}>`
         }
     `};
 
-    ${({ size }) => size == "small" &&`
+    ${({ $size }) => $size == "small" &&`
         .cta {
             padding: 6px 20px;
             font-size: 12px;
@@ -196,11 +206,12 @@ export default function ActionButton({icon, style, hasDropdown, customText, down
     
     const dialogRef = useRef<HTMLDialogElement>(null);
     
+    const [osReady, setOsReady] = useState(false);
     const [selectedIndex, setSelectedIndex] = useState(0);
     const selected = DOWNLOAD_OPTIONS[selectedIndex];
     
     //------- Detect OS
-    useEffect(() => {
+    useLayoutEffect(() => {
         function detectOS(): OS {
             if (typeof window === "undefined")
                 return "Windows";
@@ -219,6 +230,8 @@ export default function ActionButton({icon, style, hasDropdown, customText, down
         if (defaultIndex >= 0) {
             setSelectedIndex(defaultIndex);
         }
+
+        setOsReady(true);
     }, []);
     /// -----
 
@@ -282,7 +295,7 @@ export default function ActionButton({icon, style, hasDropdown, customText, down
     /// ----
 
     return (
-        <Wrapper size={size} hasDropdown={hasDropdown}>
+        <Wrapper $size={size} $hasDropdown={hasDropdown} className={`${osReady ? "os-ready" : ""}`}>
             <button className="cta" onClick={downloadable ? handleDownload : undefined} style={style}>
                 {icon || selected.icon}
 

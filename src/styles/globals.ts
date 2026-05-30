@@ -35,6 +35,8 @@ const GlobalStyle = createGlobalStyle`
         --purple-gray: #2d2d33;
         --purple-dark-gray: #1e1d22;
 
+        --pink: #9d6cd9;
+
         --white: #FFF;
         --gray: #DFDFDF;
         --medium-gray: #F1F1EF;

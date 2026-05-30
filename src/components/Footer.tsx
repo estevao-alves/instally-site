@@ -59,7 +59,7 @@ const Wrapper = styled.div`
         flex-direction: row-reverse;
         
             a {
-                color: var(--medium-gray);
+                color: var(--pink);
                 font-weight: 400;
 
                 &:hover {
@@ -113,8 +113,7 @@ export default function Footer() {
                 </div>
 
                 <div className="author">
-                    <span>Made with 💜 by <a href="https://www.estevaoalves.com/"
-                                            target="_blank">Estevão Alves</a></span>
+                    <span>A project by <a href="https://staywithinreason.com/" target="_blank">Stay</a></span>
                 </div>
         </Container>
     </Wrapper>

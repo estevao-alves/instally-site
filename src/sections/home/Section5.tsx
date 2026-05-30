@@ -20,7 +20,7 @@ const Wrapper = styled.div`
     text-align: center;
 
     span {
-      color: var(--purple-simple);
+      color: var(--pink);
     }
   }
 

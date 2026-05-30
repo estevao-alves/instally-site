@@ -22,7 +22,7 @@ const Wrapper = styled.div`
     }
 
     h2 {
-      color: var(--purple-violet);
+      color: var(--purple-simple);
       font-size: 62px;
       font-weight: 800;
       
