@@ -83,7 +83,7 @@ export default function Section4() {
     return <Wrapper>
         <Container>
             <div className="content">
-                <h2>More speed, <span>Less work.</span></h2>
+                <h2>More speed, <span>Less work</span></h2>
                 <AppExampleSvg className="appExample"/>
             </div>
         </Container>

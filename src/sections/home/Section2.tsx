@@ -134,7 +134,7 @@ export default function Section2() {
             <div className="content">
                 <div className="leftContent">
                     <div className="text">
-                        <h2>Create your <span>collections.</span></h2>
+                        <h2>Create your <span>collections</span></h2>
                         <p>Organize your apps into collections. Keep your apps organized, updated and always at hand</p>
                     </div>
                 </div>
