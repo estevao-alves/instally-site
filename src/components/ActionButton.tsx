@@ -180,7 +180,7 @@ const DOWNLOAD_OPTIONS: DownloadOption[] = [
         os: "Windows",
         label: "Portable .exe",
         text: "Windows Download",
-        url: "https://github.com/estevao-alves/Instally/releases/download/V1.1.0/Instally-v1.1.0.AppImage",
+        url: "https://github.com/estevao-alves/Instally/releases/download/V1.1.0/Instally-v1.1.0.exe",
         icon: <WindowsSvg />
     },
 
@@ -188,7 +188,7 @@ const DOWNLOAD_OPTIONS: DownloadOption[] = [
         os: "Linux",
         label: "AppImage",
         text: "Linux Download",
-        url: "https://github.com/estevao-alves/Instally/releases/download/V1.1.0/Instally-v1.1.0.exe",
+        url: "https://github.com/estevao-alves/Instally/releases/download/V1.1.0/Instally-v1.1.0.AppImage",
         icon: <LinuxSvg />
     },
 ];
