@@ -202,7 +202,7 @@ interface IActionButton {
     downloadable?: boolean;
 }
 
-export default function ActionButton({icon, style, hasDropdown, customText, downloadable, size = "large"}: IActionButton) {
+export default function ActionButton({icon, style, hasDropdown, customText, downloadable = true, size = "large"}: IActionButton) {
     
     const dialogRef = useRef<HTMLDialogElement>(null);
     
@@ -270,6 +270,7 @@ export default function ActionButton({icon, style, hasDropdown, customText, down
             return;
         }
 
+        console.log("selected.url");
         window.open(selected.url, "_blank");
     };
 

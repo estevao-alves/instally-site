@@ -144,7 +144,7 @@ export default function Section3() {
                 <div className="rightContent">
                     <div className="text">
                         <h2>Find Your favorite app</h2>
-                        <p>Easily search between more then 4.000+ packages available</p>
+                        <p>Easily search between thousands of packages available</p>
                     </div>
                     <Link href="/search">
                         <ActionButton customText={"Search your app"} icon={<></>} downloadable={false}
