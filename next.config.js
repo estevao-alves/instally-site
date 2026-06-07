@@ -1,8 +1,10 @@
-/** @type {import('next').NextConfig} */
-
 module.exports = {
+    compiler: {
+        styledComponents: true,
+    },
+
     turbopack: {},
-    
+
     webpack(config) {
         config.module.rules.push({
             test: /\.svg$/,

@@ -20,7 +20,7 @@ const Wrapper = styled.div`
     text-align: center;
 
     span {
-      color: var(--purple-simple);
+      color: var(--pink);
     }
   }
 
@@ -90,7 +90,7 @@ export default function Section5() {
         <Container>
             <div className="content">
                 <h2>Make it simple, <span>Instally</span> and Enjoy!</h2>
-                <ActionButton/>
+                <ActionButton hasDropdown={true} />
             </div>
         </Container>
     </Wrapper>

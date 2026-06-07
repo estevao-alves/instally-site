@@ -11,9 +11,16 @@ export const Wrapper = styled.div<{ dropdown: boolean, isInfoSidebarVisible: boo
     grid-template-columns: 1fr auto;
   }
 
+  h2, h3 {
+    text-align: center;
+  }
+  
   h2 {
     font-size: 30px;
-    text-align: center;
+  }
+
+  h3 {
+    font-weight: 400;
   }
 
   .searchOptions {
