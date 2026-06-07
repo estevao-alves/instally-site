@@ -1,50 +1,50 @@
 'use client'
 
-import {AppItemTypes} from "@/app/api/packages/route"
+import {Package} from "@/app/api/packages/route"
 import {createContext, useState} from "react"
 
 interface IContext {
-    packages: AppItemTypes[] | null,
-    setpackages: (items: AppItemTypes[] | null) => void,
+    packages: Package[] | null,
+    setpackages: (items: Package[] | null) => void,
 
-    packagesAdded: AppItemTypes[],
-    setPackagesAdded: (items: AppItemTypes[]) => void,
+    packagesAdded: Package[],
+    setPackagesAdded: (items: Package[]) => void,
 
-    appSelected: AppItemTypes | null,
-    setAppSelected: (item: AppItemTypes | null) => void,
+    appSelected: Package | null,
+    setAppSelected: (item: Package | null) => void,
 
-    infoSidebarVisibility: AppItemTypes | null,
-    setInfoSidebarVisibility: (item: AppItemTypes | null) => void,
+    infoSidebarVisibility: Package | null,
+    setInfoSidebarVisibility: (item: Package | null) => void,
 
     loadAppsInLocalStorage: () => void,
-    addOrRemoveApp: (item: AppItemTypes) => void
+    addOrRemoveApp: (item: Package) => void
 }
 
 export const ApplicationContext = createContext({} as IContext)
 
 export const ApplicationProvider = ({children}: any) => {
-    const [packages, setpackages] = useState<AppItemTypes[] | null>(null);
-    const [packagesAdded, setPackagesAdded] = useState<AppItemTypes[]>([]);
-    const [appSelected, setAppSelected] = useState<AppItemTypes | null>(null);
-    const [infoSidebarVisibility, setInfoSidebarVisibility] = useState<AppItemTypes | null>(null);
+    const [packages, setpackages] = useState<Package[] | null>(null);
+    const [packagesAdded, setPackagesAdded] = useState<Package[]>([]);
+    const [appSelected, setAppSelected] = useState<Package | null>(null);
+    const [infoSidebarVisibility, setInfoSidebarVisibility] = useState<Package | null>(null);
 
     function loadAppsInLocalStorage() {
         const getLocalPackages = localStorage.getItem("appList");
 
         if (getLocalPackages !== null) {
-            const itemsListDescerialized: AppItemTypes[] = JSON.parse(getLocalPackages);
+            const itemsListDescerialized: Package[] = JSON.parse(getLocalPackages);
             setPackagesAdded(itemsListDescerialized);
         }
     }
 
     // Adicionar ou remover um app
-    function addOrRemoveApp(item: AppItemTypes) {
+    function addOrRemoveApp(item: Package) {
 
-        var pkgs = [] as AppItemTypes[];
+        var pkgs = [] as Package[];
 
         // Verificar se o app já está adicionado...
-        if (packagesAdded.filter((pkg) => pkg.WingetId === item.WingetId)[0]) {
-            pkgs = packagesAdded.filter((pkg) => pkg.WingetId !== item.WingetId);
+        if (packagesAdded.filter((pkg) => pkg.PackageIds.Winget === item.PackageIds.Winget)[0]) {
+            pkgs = packagesAdded.filter((pkg) => pkg.PackageIds.Winget !== item.PackageIds.Winget);
         }
         // Se não tiver adicionado...
         else {

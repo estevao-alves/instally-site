@@ -59,7 +59,7 @@ const Wrapper = styled.div`
         flex-direction: row-reverse;
         
             a {
-                color: var(--medium-gray);
+                color: var(--pink);
                 font-weight: 400;
 
                 &:hover {
@@ -103,18 +103,17 @@ export default function Footer() {
 
                         <div className="support-links">
                             <a href="https://ko-fi.com/stay" target="_blank" style={{textDecoration: "none"}}>
-                                <ActionButton text="Donating" size="medium" icon={<HeartSvg/>} downloadable={false}/>
+                                <ActionButton customText="Donating" size="medium" icon={<HeartSvg/>} downloadable={false}/>
                             </a>
                             <a href="https://cozydragon.shop/" target="_blank" style={{textDecoration: "none"}}>
-                                <ActionButton text="Shopping" size="medium" icon={<ShopBagSvg/>} downloadable={false}/>
+                                <ActionButton customText="Shopping" size="medium" icon={<ShopBagSvg/>} downloadable={false}/>
                             </a>
                         </div>
                     </div>
                 </div>
 
                 <div className="author">
-                    <span>Made with 💜 by <a href="https://www.estevaoalves.com/"
-                                            target="_blank">Estevão Alves</a></span>
+                    <span>A project by <a href="https://staywithinreason.com/" target="_blank">Stay</a></span>
                 </div>
         </Container>
     </Wrapper>

@@ -35,6 +35,8 @@ const GlobalStyle = createGlobalStyle`
         --purple-gray: #2d2d33;
         --purple-dark-gray: #1e1d22;
 
+        --pink: #9d6cd9;
+
         --white: #FFF;
         --gray: #DFDFDF;
         --medium-gray: #F1F1EF;
@@ -89,17 +91,16 @@ const GlobalStyle = createGlobalStyle`
     button.cta {
         background-color: var(--purple-violet);
         color: var(--white);
-
         
+        border-bottom-left-radius: 20px;
+        border-top-left-radius: 20px;
         
         display: flex;
-
-        border-radius: 40px;
         align-self: center;
         font-weight: bold;
         text-transform: uppercase;
 
-        transition: 200ms ease-in-out;
+        transition: 200ms ease-in;
 
         &:hover {
             transform: scale(1.02, 1.02);

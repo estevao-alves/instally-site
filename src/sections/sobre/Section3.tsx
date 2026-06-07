@@ -143,7 +143,7 @@ export default function Section3() {
                 <h2>Faça parte da nossa <span>família Instally.</span></h2>
                 <p>Queremos que você faça parte da nossa jornada de inovação. Explore a Instally, compartilhe suas
                     ideias e sugestões, e faça parte da nossa comunidade que busca simplificar a tecnologia.</p>
-                <ActionButton text={"Baixar Agora"} icon={false}
+                <ActionButton customText={"Baixar Agora"} icon={<></>}
                               style={{backgroundColor: "#1a1a1a", padding: "20px 100px"}}/>
             </div>
         </Container>

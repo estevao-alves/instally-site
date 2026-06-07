@@ -147,7 +147,7 @@ export default function Section3() {
                         <p>Easily search between more then 4.000+ packages available</p>
                     </div>
                     <Link href="/search">
-                        <ActionButton text={"Search your app"} icon={false} downloadable={false}
+                        <ActionButton customText={"Search your app"} icon={<></>} downloadable={false}
                                       style={{backgroundColor: "#1a1a1a"}}/>
                     </Link>
                 </div>

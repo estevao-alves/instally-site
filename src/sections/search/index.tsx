@@ -4,7 +4,7 @@ import SearchSVG from "@/assets/icons/search.svg";
 import ArrowDownSVG from "@/assets/icons/arrow-down.svg";
 
 import { Container } from "@/styles/layout";
-import { AppItemTypes } from "@/app/api/packages/route";
+import { Package } from "@/app/api/packages/route";
 import { api } from "@/services/api";
 import AppsSelectedBar from "@/components/AppsSelectedBar";
 import { ApplicationContext } from "@/context/ApplicationContext";
@@ -34,7 +34,7 @@ function SearchSectionContent() {
         var categories: string[] = categorySelected;
 
         const request = await api.get(`/?limit=${limit}${categories.length ? `&categories=${categories}` : ""}${searchText ? `&search=${searchText}` : ""}`);
-        const pkgs = await request.data as AppItemTypes[];
+        const pkgs = await request.data as Package[];
 
         setpackages(pkgs);
     }
@@ -77,7 +77,8 @@ function SearchSectionContent() {
             if (dropdownToggle) setDropdownToggle(false);
         }}>
             <Container>
-                <h2>Check if your favorite app is available</h2>
+                <h2>Winget apps search</h2>
+                <h3>*Flatpak search is only available inside Instally</h3>
                 <div className="searchOptions">
                     <form className="searchBox" onSubmit={handleSubmit}>
                         <input ref={inputSearchRef} placeholder="Search" />

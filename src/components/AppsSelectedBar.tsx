@@ -1,4 +1,4 @@
-import {AppItemTypes} from "@/app/api/packages/route";
+import {Package} from "@/app/api/packages/route";
 import styled from "styled-components";
 
 import TimesSVG from "@/assets/icons/times.svg";
@@ -26,14 +26,15 @@ const Wrapper = styled.div`
     .apps {
       display: flex;
       padding-left: 14px;
+      overflow: scroll;
       
       .item {
+        flex-shrink: 0;
         background-color: rgb(60, 60, 70, .4);
         padding: 12px;
         margin-right: 10px;
         border-radius: 10px;
         
-        width: 100%;
         max-width: var(--size);
         max-height: var(--size);
 
@@ -77,24 +78,12 @@ const Wrapper = styled.div`
         }
       }
     }
-
-    .install {
-      background-color: var(--purple-violet);
-      color: var(--white);
-      height: 100%;
-      margin-left: auto;
-      margin-right: 20px;
-      padding: 10px 20px;
-      border-radius: 10px;
-      font-size: 20px;
-      font-weight: bold;
-    }
   }
 `;
 
 interface ComponentTypes {
-    appList: AppItemTypes[],
-    removeApp: (item: AppItemTypes) => void
+    appList: Package[],
+    removeApp: (item: Package) => void
 }
 
 export default function AppsSelectedBar({appList, removeApp}: ComponentTypes) {
@@ -104,14 +93,18 @@ export default function AppsSelectedBar({appList, removeApp}: ComponentTypes) {
             <div className="apps">
                 {appList.map((item, i: number) => {
                     return <div key={i} className="item" onClick={() => removeApp(item)}>
-                        <img src={`/icons/${item.WingetId}.png`}/>
+                        <img src={`/icons/${item.PackageIds.Winget}.png`}/>
                         <TimesSVG/>
                     </div>
                 })}
             </div>
 
-            <ActionButton className="install" style={{padding: "12px 30px", borderRadius: "8px", marginRight: "20px"}}
-                          text="Instally" icon={false}/>
+            <div>
+              <ActionButton
+                  style={{padding: "12px 30px", borderRadius: "8px", marginRight: "20px"}}
+                  customText="Instally"
+                  />
+            </div>
         </div>
     </Wrapper>
 }
