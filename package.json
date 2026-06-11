@@ -22,7 +22,8 @@
     "react-dom": "^19.2.6",
     "styled-components": "^6.0.7",
     "typescript": "5.2.2",
-    "uuid": "^11.0.3"
+    "uuid": "^11.0.3",
+    "yaml": "^2.9.0"
   },
   "scripts": {
     "dev": "next dev --webpack",

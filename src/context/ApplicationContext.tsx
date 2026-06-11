@@ -1,6 +1,6 @@
 'use client'
 
-import {Package} from "@/app/api/packages/route"
+import { Package } from "@/services/packages/types"
 import {createContext, useState} from "react"
 
 interface IContext {
@@ -18,6 +18,13 @@ interface IContext {
 
     loadAppsInLocalStorage: () => void,
     addOrRemoveApp: (item: Package) => void
+}
+
+export function getPackageId(pkg: Package) {
+    return (
+        pkg.PackageIds.Winget ||
+        pkg.PackageIds.Flatpak
+    );
 }
 
 export const ApplicationContext = createContext({} as IContext)
@@ -40,21 +47,22 @@ export const ApplicationProvider = ({children}: any) => {
     // Adicionar ou remover um app
     function addOrRemoveApp(item: Package) {
 
-        var pkgs = [] as Package[];
+        const itemId = getPackageId(item);
 
-        // Verificar se o app já está adicionado...
-        if (packagesAdded.filter((pkg) => pkg.PackageIds.Winget === item.PackageIds.Winget)[0]) {
-            pkgs = packagesAdded.filter((pkg) => pkg.PackageIds.Winget !== item.PackageIds.Winget);
-        }
-        // Se não tiver adicionado...
+        let pkgs: Package[];
+
+        if (packagesAdded.some(pkg => getPackageId(pkg) === itemId))
+            {pkgs = packagesAdded.filter(pkg => getPackageId(pkg) !== itemId);}
         else {
             pkgs = [item, ...packagesAdded];
         }
 
-        let itemsListSerialized = JSON.stringify(pkgs);
-        localStorage.setItem("appList", itemsListSerialized);
+        localStorage.setItem(
+            "appList",
+            JSON.stringify(pkgs)
+        );
 
-        setPackagesAdded(pkgs);
+    setPackagesAdded(pkgs);
     }
 
     return <ApplicationContext.Provider value={{

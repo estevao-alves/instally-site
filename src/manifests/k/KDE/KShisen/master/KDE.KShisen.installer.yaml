@@ -1,0 +1,23 @@
+# Created with YamlCreate.ps1 Dumplings Mod
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.installer.1.12.0.schema.json
+
+PackageIdentifier: KDE.KShisen
+PackageVersion: master
+InstallerType: nullsoft
+UpgradeBehavior: install
+ProductCode: kshisen
+Installers:
+- Architecture: x64
+  Scope: user
+  InstallerUrl: https://cdn.kde.org/ci-builds/games/kshisen/master/windows/kshisen-master-892-windows-cl-msvc2022-x86_64.exe
+  InstallerSha256: 071545CB2DFE4677EF02F6212F1B2EFD1ABA66991C72B992C79EDCC97FA91E07
+  InstallerSwitches:
+    Custom: /CurrentUser
+- Architecture: x64
+  Scope: machine
+  InstallerUrl: https://cdn.kde.org/ci-builds/games/kshisen/master/windows/kshisen-master-892-windows-cl-msvc2022-x86_64.exe
+  InstallerSha256: 071545CB2DFE4677EF02F6212F1B2EFD1ABA66991C72B992C79EDCC97FA91E07
+  InstallerSwitches:
+    Custom: /AllUsers
+ManifestType: installer
+ManifestVersion: 1.12.0

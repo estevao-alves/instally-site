@@ -10,9 +10,59 @@ import ArrowDownSVG from "@/assets/icons/arrow-down.svg";
 import { sendGAEvent } from "@next/third-parties/google";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
-export type Size = "small" | "medium" | "large";
+export type ButtonSize = "small" | "medium" | "large";
 
-const Wrapper = styled.div<{ $size?: Size; $hasDropdown?: boolean}>`
+const sizeStyles = {
+        small: `
+            .cta {
+                padding: 6px 20px;
+                font-size: 12px;
+            }
+
+            .option {
+                padding: 10px 14px;
+                font-size: 12px;
+            }
+
+            svg {
+                height: 16px;
+            }
+        `,
+
+        medium: `
+            .cta {
+                padding: 10px 20px;
+                font-size: 16px;
+            }
+
+            .option {
+                padding: 12px 14px;
+                font-size: 14px;
+            }
+
+            svg {
+                height: 20px;
+            }
+        `,
+
+        large: `
+            .cta {
+                padding: 14px 30px;
+                font-size: 20px;
+            }
+
+            .option {
+                padding: 14px 18px;
+                font-size: 16px;
+            }
+
+            svg {
+                height: 26px;
+            }
+        `
+    };
+
+const Wrapper = styled.div<{ $ButtonSize?: ButtonSize; $hasDropdown?: boolean}>`
     position: relative;
     display: flex;
     align-items: stretch;
@@ -116,53 +166,17 @@ const Wrapper = styled.div<{ $size?: Size; $hasDropdown?: boolean}>`
         }
     }
 
-    ${({ $size }) => $size == "large" &&`
-        .cta {
-            padding: 14px 30px;
-            font-size: 20px;
-        }
+    ${({ $ButtonSize = "large" }) => sizeStyles[$ButtonSize]}
 
-        .option {
-            padding: 14px 18px;
-            font-size: 16px;
-        }
-
-        svg {
-            height: 26px;
-        }
-    `};
-
-    ${({ $size }) => $size == "medium" &&`
-        .cta {
-            padding: 10px 20px;
-            font-size: 16px;
-        }
-
-        .option {
-            padding: 12px 14px;
-            font-size: 14px;
-        }
-
-        svg {
-            height: 20px;
-        }
-    `};
-
-    ${({ $size }) => $size == "small" &&`
-        .cta {
-            padding: 6px 20px;
-            font-size: 12px;
-        }
+    @media (max-width: 576px) {
+        ${({ $ButtonSize = "large" }) =>
+            sizeStyles[
+                $ButtonSize === "large"
+                    ? "medium"
+                    : "small"
+            ]}
+    }
     
-        .option {
-            padding: 10px 14px;
-            font-size: 12px;
-        }
-    
-        svg {
-            height: 16px;
-        }
-    `};
 `;
 
 type OS = "Windows" | "Linux";
@@ -196,13 +210,13 @@ const DOWNLOAD_OPTIONS: DownloadOption[] = [
 interface IActionButton {
     icon?: React.ReactNode;
     style?: React.CSSProperties;
-    size?: Size;
+    ButtonSize?: ButtonSize;
     hasDropdown?: boolean;
     customText?: string;
     downloadable?: boolean;
 }
 
-export default function ActionButton({icon, style, hasDropdown, customText, downloadable = true, size = "large"}: IActionButton) {
+export default function ActionButton({icon, style, hasDropdown, customText, downloadable = true, ButtonSize = "large"}: IActionButton) {
     
     const dialogRef = useRef<HTMLDialogElement>(null);
     
@@ -235,16 +249,6 @@ export default function ActionButton({icon, style, hasDropdown, customText, down
     }, []);
     /// -----
 
-    const toggleDropdown = () => {
-        const dialog = dialogRef.current;
-
-        if (!dialog) return;
-
-        dialog.open
-            ? dialog.close()
-            : dialog.show();
-    };
-
     const handleDownload = () => {
         sendGAEvent({
             eventName: "Download",
@@ -274,6 +278,16 @@ export default function ActionButton({icon, style, hasDropdown, customText, down
         window.open(selected.url, "_blank");
     };
 
+    const toggleDropdown = () => {
+        const dialog = dialogRef.current;
+
+        if (!dialog) return;
+
+        dialog.open
+            ? dialog.close()
+            : dialog.show();
+    };
+    
     /// ---- Close dropdown on Click Outside
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
@@ -296,7 +310,7 @@ export default function ActionButton({icon, style, hasDropdown, customText, down
     /// ----
 
     return (
-        <Wrapper $size={size} $hasDropdown={hasDropdown} className={`${osReady ? "os-ready" : ""}`}>
+        <Wrapper $ButtonSize={ButtonSize} $hasDropdown={hasDropdown} className={`${osReady ? "os-ready" : ""}`}>
             <button className="cta" onClick={downloadable ? handleDownload : undefined} style={style}>
                 {icon || selected.icon}
 

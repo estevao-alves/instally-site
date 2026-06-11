@@ -1,8 +1,9 @@
-import {Package} from "@/app/api/packages/route";
 import styled from "styled-components";
 
 import TimesSVG from "@/assets/icons/times.svg";
 import ActionButton from "./ActionButton";
+import { Package } from "@/services/packages/types";
+import { PackageIcon } from "@/sections/search/apps";
 
 const Wrapper = styled.div`
   background-color: var(--purple-gray);
@@ -27,6 +28,7 @@ const Wrapper = styled.div`
       display: flex;
       padding-left: 14px;
       overflow: scroll;
+      width: 100%;
       
       .item {
         flex-shrink: 0;
@@ -34,6 +36,8 @@ const Wrapper = styled.div`
         padding: 12px;
         margin-right: 10px;
         border-radius: 10px;
+        width: 100%;
+        aspect-ratio: 1 / 1;
         
         max-width: var(--size);
         max-height: var(--size);
@@ -87,13 +91,12 @@ interface ComponentTypes {
 }
 
 export default function AppsSelectedBar({appList, removeApp}: ComponentTypes) {
-
     return <Wrapper>
         <div className="content">
             <div className="apps">
                 {appList.map((item, i: number) => {
                     return <div key={i} className="item" onClick={() => removeApp(item)}>
-                        <img src={`/icons/${item.PackageIds.Winget}.png`}/>
+                        <PackageIcon item={item} />
                         <TimesSVG/>
                     </div>
                 })}

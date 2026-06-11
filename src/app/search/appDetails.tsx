@@ -2,19 +2,18 @@ import {useContext, useEffect, useState} from "react";
 import TagSvg from "@/assets/icons/tag.svg";
 import TimesSvg from "@/assets/icons/times.svg";
 
-import {Package} from "../api/packages/route";
 import {Wrapper} from "./styles/appDetails";
 import {api} from "@/services/api";
 import {ApplicationContext} from "@/context/ApplicationContext";
+import { PackageIcon } from "@/sections/search/apps";
+import { Package } from "@/services/packages/types";
 
-interface IAppDetails {
-    app: Package,
-    getPackages: any
-}
+type AppDetailsProps = {
+    app: Package;
+};
 
-export function AppDetails({app, getPackages}: IAppDetails) {
-
-    const {packages, packagesAdded, appSelected, setAppSelected} = useContext(ApplicationContext)
+export function AppDetails({ app }: AppDetailsProps) {
+    const {packagesAdded, setAppSelected} = useContext(ApplicationContext);
 
     const [appThumbnail, setAppThumbnail] = useState<string | null>(null);
 
@@ -33,7 +32,7 @@ export function AppDetails({app, getPackages}: IAppDetails) {
         <div className="content">
             {appThumbnail ? <div className="ogImage" style={{backgroundImage: `url(${appThumbnail})`}}/> : <></>}
             <div className="title">
-                <img src={`/icons/${app.PackageIds.Winget}.png`}/>
+                <PackageIcon item={app} />
                 <div className="rightContent">
                     <span>{app.LatestVersion}</span>
                     <span>{app.PackageIds.Winget}</span>
@@ -54,11 +53,7 @@ export function AppDetails({app, getPackages}: IAppDetails) {
                     </div>
                 </> : <></>}
 
-            <TimesSvg className="close" onClick={() => {
-                packages?.map((item) => {
-                    if (appSelected?.PackageIds.Winget === item.PackageIds.Winget) setAppSelected(null);
-                })
-            }}/>
+            <TimesSvg className="close" onClick={() => setAppSelected(null)} />
         </div>
     </Wrapper>
 }

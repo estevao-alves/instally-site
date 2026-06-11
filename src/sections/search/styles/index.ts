@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div<{ dropdown: boolean, isInfoSidebarVisible: boolean }>`
+export const Wrapper = styled.div<{ isInfoSidebarVisible: boolean }>`
   background-color: var(--purple-dark-gray);
   padding: 80px 0;
   min-height: 100vh;
@@ -29,19 +29,27 @@ export const Wrapper = styled.div<{ dropdown: boolean, isInfoSidebarVisible: boo
     gap: 30px;
     height: 50px;
 
+    label {
+      position: absolute;
+      top: -25px;
+      left: 5px;
+      color: var(--gray);
+      font-size: 14px;
+    }
+
+    button {
+        height: 100%;
+    }
+    
     .filters {
       display: flex;
       
-      .categories {
+      .dialogButton {
         background-color: var(--purple-gray);
-        color: var(--white);
         
-        min-width: fit-content;
-        width: ${({dropdown}) => dropdown ? "200px" : "initial"};
+        min-width: 180px;
         padding: 0 20px;
         border-radius: 10px;
-        border-end-end-radius: ${({dropdown}) => dropdown ? "0" : "10px"};
-        border-end-start-radius: ${({dropdown}) => dropdown ? "0" : "10px"};
         gap: 20px;
 
         font-size: 14px;
@@ -58,42 +66,49 @@ export const Wrapper = styled.div<{ dropdown: boolean, isInfoSidebarVisible: boo
 
         svg {
           width: 20px;
-          transform: rotate(${({dropdown}) => dropdown ? "180deg" : "0"});
           
           path {
             stroke: var(--white);
           }
         }
+      }
+      
+      dialog {
+        background-color: var(--purple-gray);
+        border-color: var(--purple-dark-gray);
+        border-radius: 10px;
+        
+        width: inherit;
+        
+        position: absolute;
+        overflow: hidden;
+        
+        button {
+          background-color: initial;
 
-        .dropdown {
-          background-color: var(--purple-gray);
-          inset: 0;
-          top: 50px;
-          border-end-end-radius: 10px;
-          border-end-start-radius: 10px;
-          height: fit-content;
-          width: inherit;
-          z-index: 99;
+          width: 100%;
           
-          outline: 2px solid var(--purple-dark-gray);
-          
-          position: absolute;
+          font-size: 14px;
+          font-weight: bold;
+          text-align: left;
+
           display: flex;
           flex-direction: column;
 
-          & > * {
-            padding: 10px 0;
-            padding-left: 20px;
-            
-            &:hover {
-              background-color: #282828;
-            }
+        }
+  
+        & > * {
+          padding: 10px;
+          padding-left: 20px;
+          
+          &:hover {
+            background-color: #282828;
           }
         }
       }
     }
 
-    .searchBox {
+  .searchBox {
       --radius: 25px;
       
       width: 100%;
@@ -103,7 +118,7 @@ export const Wrapper = styled.div<{ dropdown: boolean, isInfoSidebarVisible: boo
     
     .searchButton {
       background-color: transparent;
-      padding-right: 34px;
+      padding-right: 24px;
       border-radius: var(--radius);
       
       svg {

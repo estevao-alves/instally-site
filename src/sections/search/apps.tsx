@@ -1,10 +1,39 @@
-import {useContext, useEffect} from "react";
+import {useContext, useEffect, useState} from "react";
 import AlertSVG from "@/assets/icons/alert.svg";
 
 import {Wrapper} from "./styles/apps";
 import {grabFirstLetters} from "@/helpers/format";
-import {Package} from "@/app/api/packages/route";
-import {ApplicationContext} from "@/context/ApplicationContext";
+import {ApplicationContext, getPackageId} from "@/context/ApplicationContext";
+import { Package } from "@/services/packages/types";
+
+export function PackageIcon({ item }: { item: Package }) {
+
+    const [step, setStep] = useState(0);
+
+    const icons = [
+        `/icons/${item.PackageIds.Winget}.png`,
+        item.Icon,
+        item.Site
+            ? `https://www.google.com/s2/favicons?domain=${item.Site}&sz=256`
+            : null
+    ].filter(Boolean);
+
+    if (step >= icons.length) {
+        return (
+            <span>
+                {grabFirstLetters(item.Name)}
+            </span>
+        );
+    }
+
+    return (
+        <img
+            src={icons[step]!}
+            alt={item.Name}
+            onError={() => setStep(step + 1)}
+        />
+    );
+}
 
 export default function Apps() {
     const {packages, addOrRemoveApp, packagesAdded, appSelected, setAppSelected} = useContext(ApplicationContext)
@@ -19,20 +48,18 @@ export default function Apps() {
             {packages === null ? <div className="loading" style={{margin: "auto"}}/>
                 : packages.map((item: Package, i: number) => {
 
-                    const alreadySelected = appSelected?.PackageIds.Winget === item.PackageIds.Winget;
+                     const isSelected = packagesAdded.some(pkg => getPackageId(pkg) === getPackageId(item));
 
-                    const iconImg = !!item?.Site ?
-                        <img src={`/icons/${item.PackageIds.Winget}.png`} alt=""/>
-                        : <span>{grabFirstLetters(item.Name)}</span>;
+                     const isInfoOpen = appSelected && getPackageId(appSelected) === getPackageId(item);
 
-                        return <div key={i} className={`item${(packagesAdded.filter((pkg) => pkg.PackageIds.Winget === item.PackageIds.Winget).length > 0) ? " selected" : ""}`}>
+                        return <div key={i} className={`item${isSelected ? " selected" : ""}`}>
                             <div className="clickArea" onClick={() => addOrRemoveApp(item)}></div>
                             <div className="icon">
-                                {iconImg}
+                                <PackageIcon item={item} />
                             </div>
                             <h3>{item.Name}</h3>
-                        <AlertSVG className={`infoSvg${alreadySelected ? " active" : ""}`}
-                                  onClick={() => setAppSelected(alreadySelected ? null : item)}/>
+                        <AlertSVG className={`infoSvg${isInfoOpen ? " active" : ""}`}
+                                  onClick={() => setAppSelected(isInfoOpen ? null : item)}/>
                     </div>
                 })}
         </div>

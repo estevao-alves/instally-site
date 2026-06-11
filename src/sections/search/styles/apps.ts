@@ -39,7 +39,6 @@ export const Wrapper = styled.div`
   
   .item {
     min-height: 210px;
-    background-color: var(--purple-gray);
     padding: 30px 40px;
     border-radius: 24px;
     gap: 20px;
@@ -53,6 +52,7 @@ export const Wrapper = styled.div`
     position: relative;
 
     &.selected {
+      background-color: var(--purple-gray);
       outline: var(--green) solid 2px;
       opacity: 80%;
     }
@@ -66,13 +66,16 @@ export const Wrapper = styled.div`
       z-index: 2;
     }
 
-    .icon, img {
+    .icon {
+      background-color: var(--purple-gray-medium);
+      border-radius: 50%;
       height: 60px;
+      width: 60px;
       position: relative;
       user-select: none;
+      overflow: hidden;
 
         span {
-          background-color: var(--purple-dark-gray);
           height: 60px;
           width: 60px;
           padding: 2px;
@@ -99,6 +102,13 @@ export const Wrapper = styled.div`
       &:hover {
         opacity: 80%;
       }
+    }
+
+    img {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+      padding: 8px;
     }
 
     h3 {

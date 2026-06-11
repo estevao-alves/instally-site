@@ -1,0 +1,23 @@
+# Created with YamlCreate.ps1 Dumplings Mod
+# yaml-language-server: $schema=https://aka.ms/winget-manifest.installer.1.12.0.schema.json
+
+PackageIdentifier: KDE.KBreakOut
+PackageVersion: master
+InstallerType: nullsoft
+UpgradeBehavior: install
+ProductCode: kbreakout
+Installers:
+- Architecture: x64
+  Scope: user
+  InstallerUrl: https://cdn.kde.org/ci-builds/games/kbreakout/master/windows/kbreakout-master-863-windows-cl-msvc2022-x86_64.exe
+  InstallerSha256: 996CB76882D9762C72FBD57A2E9778A06D03D6D808C403EF3D0AF40E0FACA2CD
+  InstallerSwitches:
+    Custom: /CurrentUser
+- Architecture: x64
+  Scope: machine
+  InstallerUrl: https://cdn.kde.org/ci-builds/games/kbreakout/master/windows/kbreakout-master-863-windows-cl-msvc2022-x86_64.exe
+  InstallerSha256: 996CB76882D9762C72FBD57A2E9778A06D03D6D808C403EF3D0AF40E0FACA2CD
+  InstallerSwitches:
+    Custom: /AllUsers
+ManifestType: installer
+ManifestVersion: 1.12.0
