@@ -136,6 +136,10 @@ export async function fetchWingetManifestPackages(): Promise<Package[]> {
                         
                         Site: manifest.PublisherUrl || manifest.PackageUrl || "",
 
+                        Icon: "",
+
+                        Screenshots: [],
+
                         VersionsLength: versions.length,
 
                         LatestVersion: manifest.PackageVersion || latestVersion,

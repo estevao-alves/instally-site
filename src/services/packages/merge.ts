@@ -29,6 +29,15 @@ export function mergePackages(sources: Package[][]) {
                 existing.Description ||= pkg.Description;
                 existing.Publisher ||= pkg.Publisher;
                 existing.Site ||= pkg.Site;
+                existing.Icon ||= pkg.Icon;
+
+                if (
+                    (!existing.Screenshots || existing.Screenshots.length === 0) &&
+                    pkg.Screenshots?.length
+                ) {
+                    existing.Screenshots = pkg.Screenshots;
+                }
+
                 existing.LatestVersion ||= pkg.LatestVersion;
                 existing.VersionsLength ||= pkg.VersionsLength;
                 existing.Score ||= pkg.Score;

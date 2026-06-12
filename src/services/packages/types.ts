@@ -4,12 +4,12 @@ export type Package = {
     Publisher: string,
     Tags: string[],
     Description: string,
-    Site?: string,
+    Site: string,
     VersionsLength: number,
     LatestVersion: string,
     Score: number,
-    Icon?: string,
-    Screenshots?: string[];
+    Icon: string,
+    Screenshots: string[];
     PackageIds: {
         Winget?: string,
         Flatpak?: string,
