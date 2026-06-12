@@ -170,7 +170,7 @@ export default function Section1() {
         <Container>
             <div className="content">
                 <h1>Install multiple apps with <span>One Click</span></h1>
-                <p>Instally is a open source tool to install and manage your apps on Windows and Linux</p>
+                <p>Instally is a open source tool to install and manage your apps on Linux and Windows</p>
                 <ActionButton hasDropdown={true} />
             </div>
 

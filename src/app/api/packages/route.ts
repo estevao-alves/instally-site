@@ -61,8 +61,8 @@ export async function GET(request: Request) {
 export async function PUT() {
     
     try {
-        // const winget = await fetchWingetPackages();
-        const winget = await fetchWingetManifestPackages();
+        const winget = await fetchWingetPackages();
+        // const winget = await fetchWingetManifestPackages();
         const flatpak = await fetchFlatpakPackages();
 
         const merged = mergePackages([winget, flatpak]);

@@ -29,6 +29,7 @@ export function mergePackages(sources: Package[][]) {
                 existing.Description ||= pkg.Description;
                 existing.Publisher ||= pkg.Publisher;
                 existing.Site ||= pkg.Site;
+                
                 existing.Icon ||= pkg.Icon;
 
                 if (

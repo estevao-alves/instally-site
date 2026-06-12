@@ -126,13 +126,17 @@ export async function fetchWingetManifestPackages(): Promise<Package[]> {
                     result.push({
                         Guid: uuidv4(),
                         
-                        Name: manifest.PackageName || "",
+                        Name: String(manifest.PackageName || ""),
                         
-                        Publisher: manifest.Publisher || "",
+                        Publisher: String(manifest.Publisher || ""),
                         
                         Tags: manifest.Tags || [],
                         
-                        Description: manifest.Description || manifest.ShortDescription || "",
+                        Description: String(
+                            manifest.Description ||
+                            manifest.ShortDescription ||
+                            ""
+                        ),
                         
                         Site: manifest.PublisherUrl || manifest.PackageUrl || "",
 
