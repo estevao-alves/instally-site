@@ -210,13 +210,13 @@ const DOWNLOAD_OPTIONS: DownloadOption[] = [
 interface IActionButton {
     icon?: React.ReactNode;
     style?: React.CSSProperties;
-    ButtonSize?: ButtonSize;
+    buttonSize?: ButtonSize;
     hasDropdown?: boolean;
     customText?: string;
     downloadable?: boolean;
 }
 
-export default function ActionButton({icon, style, hasDropdown, customText, downloadable = true, ButtonSize = "large"}: IActionButton) {
+export default function ActionButton({icon, style, hasDropdown, customText, downloadable = true, buttonSize = "large"}: IActionButton) {
     
     const dialogRef = useRef<HTMLDialogElement>(null);
     
@@ -310,7 +310,7 @@ export default function ActionButton({icon, style, hasDropdown, customText, down
     /// ----
 
     return (
-        <Wrapper $ButtonSize={ButtonSize} $hasDropdown={hasDropdown} className={`${osReady ? "os-ready" : ""}`}>
+        <Wrapper $ButtonSize={buttonSize} $hasDropdown={hasDropdown} className={`${osReady ? "os-ready" : ""}`}>
             <button className="cta" onClick={downloadable ? handleDownload : undefined} style={style}>
                 {icon || selected.icon}
 

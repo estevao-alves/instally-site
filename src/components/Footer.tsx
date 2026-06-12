@@ -103,10 +103,10 @@ export default function Footer() {
 
                         <div className="support-links">
                             <a href="https://ko-fi.com/stay" target="_blank" style={{textDecoration: "none"}}>
-                                <ActionButton customText="Donating" size="medium" icon={<HeartSvg/>} downloadable={false}/>
+                                <ActionButton customText="Donating" buttonSize="medium" icon={<HeartSvg/>} downloadable={false}/>
                             </a>
                             <a href="https://cozydragon.shop/" target="_blank" style={{textDecoration: "none"}}>
-                                <ActionButton customText="Shopping" size="medium" icon={<ShopBagSvg/>} downloadable={false}/>
+                                <ActionButton customText="Shopping" buttonSize="medium" icon={<ShopBagSvg/>} downloadable={false}/>
                             </a>
                         </div>
                     </div>
